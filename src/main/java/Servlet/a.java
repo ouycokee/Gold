@@ -16,7 +16,7 @@ public class a extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public a() {
-        super();
+    	System.out.println(1);
         // TODO Auto-generated constructor stub
     }
 
