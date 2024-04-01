@@ -58,44 +58,25 @@
 					<li>
 						<a href="#">
 							<i class="h_icon2"></i>
-							<span>界面管理</span>
+							<span>订单管理</span>
 						</a>
 					</li>
 					<li>
 						<a href="#">
 							<i class="h_icon3"></i>
-							<span>栏目管理</span>
+							<span>商品管理</span>
 						</a>
 					</li>
 					<li>
 						<a href="#">
 							<i class="h_icon4"></i>
-							<span>内容管理</span>
+							<span>评论管理</span>
 						</a>
 					</li>
 					<li>
 						<a href="#">
 							<i class="h_icon5"></i>
 							<span>用户管理</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<i class="h_icon6"></i>
-							<span>论坛中心</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<i class="h_icon7"></i>
-							<span>应用中心</span>
-						</a>
-					</li>
-
-					<li>
-						<a href="#">
-							<i class="h_icon8"></i>
-							<span>工具</span>
 						</a>
 					</li>
 				</ul>
