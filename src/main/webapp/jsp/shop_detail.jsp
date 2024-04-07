@@ -62,9 +62,6 @@
 			color: #862633;
 			margin-top: 20px;
 		}
-		.shop_right_price span{
-			font-size: 14px;
-		}
 		.shop_right_seleprice_center{
 			display: flex;
 			flex-wrap: wrap;
@@ -169,7 +166,7 @@
 			周大福 龙年生肖系列 行运一条龙黄金金章
 		</div>
 		<div class="shop_right_price">
-			￥360.00<span>起</span>
+			￥100.00
 		</div>
 		<div class="shop_right_seleprice">
 			<div class="shop_right_seleprice_div">
@@ -179,25 +176,25 @@
 						100.00
 					</div>
 					<div class="shop_right_seleprice_center_price">
-						100.00
+						200.00
 					</div>
 					<div class="shop_right_seleprice_center_price">
-						100.00
+						300.00
 					</div>
 					<div class="shop_right_seleprice_center_price">
-						100.00
+						400.00
 					</div>
 					<div class="shop_right_seleprice_center_price">
-						100.00
+						500.00
 					</div>
 					<div class="shop_right_seleprice_center_price">
-						100.00
+						600.00
 					</div>
 					<div class="shop_right_seleprice_center_price">
-						100.00
+						700.00
 					</div>
 					<div class="shop_right_seleprice_center_price">
-						100.00
+						800.00
 					</div>
 				</div>
 			</div>
@@ -210,7 +207,7 @@
 				    <button onclick="decreaseQuantity()">-</button>
 				    <input type="number" value="1" min="1" max="1024" onchange="updateQuantity(this.value)">
 				    <button onclick="increaseQuantity()">+</button>
-				</div>
+				</div> 
 			</div>
 		</div>
 		<div class="shop_right_btn">
@@ -223,61 +220,67 @@
 <%@include file="footer.jsp" %>
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
-		var firstImage = document.querySelector('.imglist img');
-		firstImage.classList.add('selected');
-		document.getElementById('selectedImage').innerHTML = '<img src="' + firstImage.src + '" style="max-width:100%; max-height:100%;">';
+	    var firstImage = document.querySelector('.imglist img');
+	    firstImage.classList.add('selected');
+	    document.getElementById('selectedImage').innerHTML = '<img src="' + firstImage.src + '" style="max-width:100%; max-height:100%;">';
 	});
-
+	
 	var shop_price_div = document.querySelectorAll('.shop_right_seleprice_center_price');
-
+	
 	shop_price_div.forEach(function(element) {
-		element.addEventListener("click", function() {
-			// 移除所有价格元素的选中状态
-			shop_price_div.forEach(function(el) {
-				el.classList.remove('selected');
-			});
-			// 添加当前点击的价格元素的选中状态
-			element.classList.add('selected');
-		});
+	    element.addEventListener("click", function() {
+	        // 移除所有价格元素的选中状态
+	        shop_price_div.forEach(function(el) {
+	            el.classList.remove('selected');
+	        });
+	        // 添加当前点击的价格元素的选中状态
+	        element.classList.add('selected');
+	
+	        // 获取选中价格的值
+	        var price = element.innerText.trim();
+	        // 设置选中价格到shop_right_price中
+	        document.querySelector('.shop_right_price').innerText = "￥"+price;
+	    });
 	});
-
+	
 	function selectImage(image) {
-		let selectedImg = document.querySelector('.imglist img.selected');
-		if (selectedImg) {
-			selectedImg.classList.remove('selected');
-		}
-		image.classList.add('selected');
-		document.getElementById('selectedImage').innerHTML = '<img src="' + image.src + '" style="max-width:100%; max-height:100%;">';
+	    let selectedImg = document.querySelector('.imglist img.selected');
+	    if (selectedImg) {
+	        selectedImg.classList.remove('selected');
+	    }
+	    image.classList.add('selected');
+	    document.getElementById('selectedImage').innerHTML = '<img src="' + image.src + '" style="max-width:100%; max-height:100%;">';
+	}
+	
+	
+	function decreaseQuantity() {
+	    let input = document.querySelector('.shop_right_count_right_shuliang input');
+	    let currentValue = parseInt(input.value);
+	    if (currentValue > 1) {
+	        input.value = currentValue - 1;
+	    }
+	}
+	
+	function increaseQuantity() {
+	    let input = document.querySelector('.shop_right_count_right_shuliang input');
+	    let currentValue = parseInt(input.value);
+	    let maxStock = 1024; // 库存数量，根据实际情况修改
+	    if (currentValue < maxStock) {
+	        input.value = currentValue + 1;
+	    }
+	}
+	
+	function updateQuantity(value) {
+	    let input = document.querySelector('.shop_right_count_right_shuliang input');
+	    let newValue = parseInt(value);
+	    let maxStock = 1024; // 库存数量，根据实际情况修改
+	    if (newValue < 1) {
+	        input.value = 1;
+	    } else if (newValue > maxStock) {
+	        input.value = maxStock;
+	    }
 	}
 
-
-	    function decreaseQuantity() {
-	        let input = document.querySelector('.shop_right_count_right_shuliang input');
-	        let currentValue = parseInt(input.value);
-	        if (currentValue > 1) {
-	            input.value = currentValue - 1;
-	        }
-	    }
-	
-	    function increaseQuantity() {
-	        let input = document.querySelector('.shop_right_count_right_shuliang input');
-	        let currentValue = parseInt(input.value);
-	        let maxStock = 1024; // 库存数量，根据实际情况修改
-	        if (currentValue < maxStock) {
-	            input.value = currentValue + 1;
-	        }
-	    }
-	
-	    function updateQuantity(value) {
-	        let input = document.querySelector('.shop_right_count_right_shuliang input');
-	        let newValue = parseInt(value);
-	        let maxStock = 1024; // 库存数量，根据实际情况修改
-	        if (newValue < 1) {
-	            input.value = 1;
-	        } else if (newValue > maxStock) {
-	            input.value = maxStock;
-	        }
-	    }
 </script>
 
 </body>

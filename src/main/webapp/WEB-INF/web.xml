@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>Servlet.a</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>demo</servlet-name>
+  	<display-name>demo</display-name>
+  	<description></description>
+  	<servlet-class>Servlet.demo</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>a</servlet-name>
   	<url-pattern>/a</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>demo</servlet-name>
+  	<url-pattern>/demo</url-pattern>
   </servlet-mapping>
 </web-app>

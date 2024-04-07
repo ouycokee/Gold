@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %> 
 <link rel="icon" href="../img/clown.png" type="image/png">
 <!DOCTYPE html>
 <html lang="en">
@@ -840,73 +842,27 @@
     <h2 class="main_title">新品上市</h2>
     <img class="main_title_img" src="../img/主页钻石.png" />
     <ul class="main_ul">
-        <li class="main_li">
-            <img src="../img/新品上市1.jpg" />
-            <div>周大福 龙年生肖系列 行运一条龙黄金金章</div>
-            <div class="main_price">￥360.00起</div>
-        </li>
-        <li class="main_li">
-            <img src="../img/新品上市1.jpg" />
-            <div>周大福 龙年生肖系列 行运一条龙黄金金章</div>
-            <div class="main_price">￥360.00起</div>
-        </li>
-        <li class="main_li">
-            <img src="../img/新品上市1.jpg" />
-            <div>周大福 龙年生肖系列 行运一条龙黄金金章</div>
-            <div class="main_price">￥360.00起</div>
-        </li>
-        <li class="main_li">
-            <img src="../img/新品上市1.jpg" />
-            <div>周大福 龙年生肖系列 行运一条龙黄金金章</div>
-            <div class="main_price">￥360.00起</div>
-        </li>
-        <li class="main_li">
-            <img src="../img/新品上市1.jpg" />
-            <div>周大福 龙年生肖系列 行运一条龙黄金金章</div>
-            <div class="main_price">￥360.00起</div>
-        </li>
-        <li class="main_li">
-            <img src="../img/新品上市1.jpg" />
-            <div>周大福 龙年生肖系列 行运一条龙黄金金章</div>
-            <div class="main_price">￥360.00起</div>
-        </li>
-    </ul>
+	    <c:forEach var="image" items="${listimgx}" varStatus="loop">
+	        <li class="main_li">
+	            <img src="../img/${image.imageUrl}" />
+	            <div>${listprox[loop.index].proName}</div>
+	            <div class="main_price">￥360.00起</div>
+	        </li>
+	    </c:forEach>
+	</ul>
     <div class="main_genduo">查看更多<img src="../img/右箭头.png" /></div>
 
     <h2 class="main_title" style="margin-top: 60px;">热销商品</h2>
     <img class="main_title_img" src="../img/主页钻石.png" />
     <ul class="main_ul">
-        <li class="main_li">
-            <img src="../img/新品上市2.jpg" />
-            <div>周大福 爆闪圣诞树22K金钻石项链</div>
-            <div class="main_price">￥4213.60起</div>
-        </li>
-        <li class="main_li">
-            <img src="../img/新品上市2.jpg" />
-            <div>周大福 爆闪圣诞树22K金钻石项链</div>
-            <div class="main_price">￥4213.60起</div>
-        </li>
-        <li class="main_li">
-            <img src="../img/新品上市2.jpg" />
-            <div>周大福 爆闪圣诞树22K金钻石项链</div>
-            <div class="main_price">￥4213.60起</div>
-        </li>
-        <li class="main_li">
-            <img src="../img/新品上市2.jpg" />
-            <div>周大福 爆闪圣诞树22K金钻石项链</div>
-            <div class="main_price">￥4213.60起</div>
-        </li>
-        <li class="main_li">
-            <img src="../img/新品上市2.jpg" />
-            <div>周大福 爆闪圣诞树22K金钻石项链</div>
-            <div class="main_price">￥4213.60起</div>
-        </li>
-        <li class="main_li">
-            <img src="../img/新品上市2.jpg" />
-            <div>周大福 爆闪圣诞树22K金钻石项链</div>
-            <div class="main_price">￥4213.60起</div>
-        </li>
-    </ul>
+	    <c:forEach var="image" items="${listimgr}" varStatus="loop">
+	        <li class="main_li">
+	            <img src="../img/${image.imageUrl}" />
+	            <div>${listpror[loop.index].proName}</div>
+	            <div class="main_price">￥360.00起</div>
+	        </li>
+	    </c:forEach>
+	</ul>
     <div class="main_genduo">查看更多<img src="../img/右箭头.png" /></div>
 </main>
 
