@@ -559,7 +559,10 @@
 	}
 	.main_price{
 		color: #862633;
-		font-size: 18px;
+	    font-size: 18px;
+	    text-align: center;
+	    position: relative;
+	    top: 40px;
 	}
 	.main_genduo{
 		display: flex;
@@ -574,6 +577,9 @@
 	}
 	.main_li:hover{
 		box-shadow: 0 10px 24px 0 rgba(0,0,0,.12);
+	}
+	.price_span{
+		font-size:14px;
 	}
 </style>
 </head>
@@ -626,7 +632,7 @@
 		    <ul>
 		        <li><a href="#">首页</a></li>
 		        <li>
-		            <a href="#">全部商品</a>
+		            <a href="home">全部商品</a>
 		            <div class="hover_box">
 						<div class="layui-tab layui-tab-brief">
 						  <ul class="layui-tab-title">
@@ -838,33 +844,38 @@
 		</div>
 	</div>
 	
-	<main id="main">
+<main id="main">
     <h2 class="main_title">新品上市</h2>
     <img class="main_title_img" src="../img/主页钻石.png" />
     <ul class="main_ul">
-	    <c:forEach var="image" items="${listimgx}" varStatus="loop">
-	        <li class="main_li">
-	            <img src="../img/${image.imageUrl}" />
-	            <div>${listprox[loop.index].proName}</div>
-	            <div class="main_price">￥360.00起</div>
-	        </li>
-	    </c:forEach>
-	</ul>
+        <c:forEach var="image" items="${listimgx}" varStatus="loop">
+            <li class="main_li">
+                <a href="promessage?id=${listprox[loop.index].proId}">
+                    <img src="../img/${image.imageUrl}" />
+                    <div style="text-align:center">${listprox[loop.index].proName}</div>
+                    <div class="main_price">￥${listminpri[loop.index].price} <span class="price_span">起</span></div>
+                </a>
+            </li>
+        </c:forEach>
+    </ul>
     <div class="main_genduo">查看更多<img src="../img/右箭头.png" /></div>
 
     <h2 class="main_title" style="margin-top: 60px;">热销商品</h2>
     <img class="main_title_img" src="../img/主页钻石.png" />
     <ul class="main_ul">
-	    <c:forEach var="image" items="${listimgr}" varStatus="loop">
-	        <li class="main_li">
-	            <img src="../img/${image.imageUrl}" />
-	            <div>${listpror[loop.index].proName}</div>
-	            <div class="main_price">￥360.00起</div>
-	        </li>
-	    </c:forEach>
-	</ul>
+        <c:forEach var="image" items="${listimgr}" varStatus="loop">
+            <li class="main_li">
+                <a href="promessage?id=${listprox[loop.index].proId}">
+                    <img src="../img/${image.imageUrl}" />
+                    <div style="text-align:center">${listpror[loop.index].proName}</div>
+                    <div class="main_price">￥360.00 <span class="price_span">起</span></div>
+                </a>
+            </li>
+        </c:forEach>
+    </ul>
     <div class="main_genduo">查看更多<img src="../img/右箭头.png" /></div>
 </main>
+
 
 <div class="huidaodingduan"></div>
 <div class="zunxiangtiyan">

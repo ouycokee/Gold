@@ -12,6 +12,7 @@ import entity.ProductMessage;
 
 public class HomeDAO extends baseDAO{
 	public List<ProductMessage> selectProx(){
+		//SELECT * FROM products_message ORDER BY Pro_id DESC LIMIT 0, 6;降序查找最新上架的shang'p
 		String sql = "select * from products_message LIMIT 0,6";
 		return this.executeQuery(sql, new Mapper<ProductMessage>() {
 

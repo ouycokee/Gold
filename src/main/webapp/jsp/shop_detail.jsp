@@ -154,11 +154,10 @@
 <div class="shop_detail">
     <div class="shop_left">
         <div class="shop_left_imglist">
-            <div class="imglist"><img src="../img/long2.jpg" onclick="selectImage(this)"/></div>
-            <div class="imglist"><img src="../img/long.jpg" onclick="selectImage(this)"/></div>
-            <div class="imglist"><img src="../img/long1.jpg" onclick="selectImage(this)"/></div>
-            <div class="imglist"><img src="../img/long3.jpg" onclick="selectImage(this)"/></div>
-        </div>
+		    <c:forEach var="image" items="${listimg}">
+		        <div class="imglist"><img src="../img/${image.imageUrl}" onclick="selectImage(this)"/></div>
+		    </c:forEach>
+		</div>
         <div class="shop_left_imgbig" id="selectedImage"></div>
     </div>
     <div class="shop_right">
