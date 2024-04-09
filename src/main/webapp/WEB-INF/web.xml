@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>Servlet.a</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>GuanliyuanServlet</servlet-name>
+  	<display-name>GuanliyuanServlet</display-name>
+  	<description></description>
+  	<servlet-class>Servlet.GuanliyuanServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>a</servlet-name>
   	<url-pattern>/a</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>GuanliyuanServlet</servlet-name>
+  	<url-pattern>/GuanliyuanServlet</url-pattern>
   </servlet-mapping>
 </web-app>

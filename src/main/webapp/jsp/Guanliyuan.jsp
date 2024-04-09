@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8" isErrorPage="false"%>
+ <%@ page isELIgnored="false" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="renderer" content="webkit">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="//cdn.staticfile.org/layui/2.9.7/css/layui.css" rel="stylesheet">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/Guanliyuan.css" type="text/css" />
+<link rel="stylesheet" href="css/Guanliyuan.css" type="text/css" />
 <script src="//cdn.staticfile.org/layui/2.9.7/layui.js"></script>
 <style>
 	.layui-nav.layui-nav-tree{
@@ -27,9 +28,9 @@
 				  <li class="layui-nav-item layui-nav-itemed">
 				    <a href="javascript:;">默认展开</a>
 				    <dl class="layui-nav-child">
-				      <dd><a href="javascript:;">选项1</a></dd>
-				      <dd><a href="javascript:;">选项2</a></dd>
-				      <dd><a href="javascript:;">选项3</a></dd>
+				      <dd><a href="javascript:;" data-target="content1">管理员详情</a></dd>
+				      <dd><a href="javascript:;" data-target="content2">用户详情</a></dd>
+				      <dd><a href="javascript:;" data-target="content3">订单详情</a></dd>
 				    </dl>
 				  </li>
 				  <li class="layui-nav-item">
@@ -50,7 +51,7 @@
 			<div class="h_nav">
 				<ul>
 					<li>
-						<a href="#" class="h_sel">
+						<a href="javascript:;" data-target="shouye" class="h_sel">
 							<i class="h_icon1"></i>
 							<span>首页</span>
 						</a>
@@ -94,41 +95,47 @@
 		<div class="t_right">
 			<div class="r_location">
 				<i></i>
-				<p>您当前所在位置：首页 > 后台中心</p>
+				<p>您当前所在位置：<a href="javascript:;" data-target="shouye">后台首页</a> > <a class="tianchong"></a></p>
 			</div>
-			<div class="r_message">
+			<div class="r_message" id="content1">
 				<div class="m_list m_1">
-					<div class="m_pic"></div>
-					<div class="m_desc">
-						<span>2450</span>
-						<p>所有用户数</p>
-					</div>
+					<table class="biaoge">
+					用户信息
+						<tr>
+							<th>编号</th>
+							<th>姓名</th>
+							<th>性别</th>
+						</tr>
+						<c:forEach items="${information}" var="i">
+			                <tr>
+			                    <td><c:out value="${i.getId()}"/></td>
+			                    <td><c:out value="${i.getUsername()}"/></td>
+			                    <td><c:out value="${i.getGender()}"/></td>
+			                </tr>
+			            </c:forEach>
+					</table>
 				</div>
 				<div class="m_list m_2">
 					<div class="m_pic"></div>
 					<div class="m_desc">
-						<span>2450</span>
-						<p>所有用户数</p>
+						<p>订单详情</p>
 					</div>
 				</div>
 				<div class="m_list m_3">
 					<div class="m_pic"></div>
 					<div class="m_desc">
-						<span>2450</span>
-						<p>所有用户数</p>
+						<p>管理员详情</p>
 					</div>
 				</div>
 				<div class="m_list m_4">
 					<div class="m_pic"></div>
 					<div class="m_desc">
-						<span>2450</span>
-						<p>所有用户数</p>
+						<p>评论详情</p>
 					</div>
 				</div>
 				<div class="m_list m_5">
 					<div class="m_pic"></div>
 					<div class="m_desc">
-						<span>2450</span>
 						<p>所有用户数</p>
 					</div>
 				</div>
@@ -169,6 +176,15 @@
 				</div>
 				<div class="clear"></div>
 			</div>
+			<div class="content" id="content2">
+				<table id="table1"></table>
+			</div>
+			<div class="content" id="content3">
+				<table id="table2"></table>
+			</div>
+			<div class="content" id="content4">
+				<table id="table3"></table>
+			</div>
 		</div>
 	</div>
 	<script>
@@ -176,6 +192,68 @@
 		  var element = layui.element;
 		  element.render('nav');
 		});
-		</script>
+	</script>
+	<script>
+		$('.layui-nav-child a').on('click', function() {
+		    var target = $(this).data('target');
+		    if (target === "content1") {
+		        $('.content').hide();
+		        $('.r_message').hide();
+		        $('#content4').show();
+		        $.ajax({
+		        	type:'GET',
+		        	url:'jsp/AjaxServlet',
+		        	data:{action:'getData3'},
+		        	success:function(response){
+		        		$('#table3').html(response);
+		        		$('.tianchong').html("管理员详情");
+		        	}
+		        });
+		    }else {
+		        $('.content').hide();
+		        $('.r_message').hide();
+		        $('#' + target).show();
+		        var target2 = $(this).data('target');
+		        if(target2 === "content2"){
+		        	$.ajax({
+			        	type:'GET',
+			        	url:'jsp/AjaxServlet',
+			        	data:{action:'getData1'},
+			        	success:function(response){
+			        		$('#table1').html(response);
+			        		$('.tianchong').html("用户详情");
+			        	}
+			        });
+		        }else{
+		        	var target3 = $(this).data('target');
+		        	if(target3 === "content3"){
+			        	$.ajax({
+			        		type:'GET',
+			        		url:'jsp/AjaxServlet',
+			        		data:{action:'getData2'},
+			        		success:function(response){
+			        			$('#table2').html(response);
+			        			$('.tianchong').html("订单详情");
+			        		}
+			        	});
+			        }
+		        }
+		    }
+		});
+		$('.h_nav ul li a').on('click',function(){
+			var target = $(this).data('target');
+			if(target==="shouye"){
+				$('.r_message').show();
+				$('.content').hide();
+			}
+		});
+		$('.r_location p a').on('click',function(){
+			var target = $(this).data('target');
+			if(target==="shouye"){
+				$('.r_message').show();
+				$('.content').hide();
+			}
+		});
+	</script>
 </body>
 </html>

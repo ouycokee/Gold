@@ -139,7 +139,6 @@
 			width: 14px;
 			height: 14px;
 			display: block;
-			background: url("picture/ht_icon.png") no-repeat 0 -51px;
 			float: left;
 			margin: 6px 8px;
 		}
@@ -166,7 +165,6 @@
 			width: 14px;
 			height: 18px;
 			display: block;
-			background: url("picture/ht_icon.png") no-repeat;
 			background-position: -16px -51px;
 			float: left;
 			margin: 16px 20px 0 20px;
@@ -175,6 +173,16 @@
 		/*end r_location*/
 
 		/*r_message start*/
+		
+		.content{
+			display:none;
+			width:99%;
+			height:70%;
+		}
+		.content table{
+			margin-left:5px;
+			margin-top:4px;
+		}
 		.tz_content .t_right .r_message .m_list {
 			height: 99px;
 			float: left;
@@ -184,10 +192,29 @@
 
 		.tz_content .t_right .r_message .m_1 {
 			width: 57%;
-			height:336px;
-			background: #27a9e3;
+			height:453px;
 		}
-
+		
+		.biaoge,#table1,#table2,#table3{
+			width:100%;
+			height:400px;
+			border-collapse: collapse;
+			border:2px solid black;
+			font-family: Arial,sans-serif;
+		}
+		.biaoge th, .biaoge td,#table1 th,#table1 td ,#table2 th,#table2 td,#table3 th,#table3 td{
+		    border: 1px solid black; /* 单元格边框 */
+		    padding: 8px; /* 内边距 */
+		    text-align: center; /* 文字居中 */
+		}
+		
+		.biaoge th:hover,#table1 th:hover,#table2 th:hover,#table3 th:hover {
+		    background-color: #f2f2f2; /* 表头背景色 */
+		}
+		
+		.biaoge tr:hover,#table1 tr:hover,#table2 tr:hover,#table3 tr:hover {
+		    background-color: #ddd; /* 鼠标悬停时的背景色 */
+		}
 		.tz_content .t_right .r_message .m_2 {
 			width: 22%;
 			background: #28b779;
@@ -219,7 +246,7 @@
 		}
 
 		.tz_content .t_right .r_message .m_8 {
-			width: 18%;
+			width: 40%;
 			background: #6297bc;
 		}
 
@@ -229,21 +256,17 @@
 		}
 
 		.tz_content .t_right .r_message .m_10 {
-			width: 19%;
+			width: 38%;
 			background: #28b779;
 		}
 
 		.tz_content .t_right .r_message .m_list .m_pic {
 			width: 44px;
 			height: 46px;
-			background: url("picture/ht_icon.png") no-repeat;
 			float: left;
 			margin: 25px 10px 0 20px;
 		}
 
-		.tz_content .t_right .r_message .m_list:hover {
-			background: #2f3437;
-		}
 
 		.tz_content .t_right .r_message .m_list .m_desc {
 			color: #fff;
@@ -253,47 +276,11 @@
 		.tz_content .t_right .r_message .m_list .m_desc span {
 			font-size: 24px;
 		}
-
-		.tz_content .t_right .r_message .m_1 .m_pic {
-			background-position: 0 -76px;
+		.r_location p a:hover{
+			cursor:pointer;
+			color:red;
 		}
-
-		.tz_content .t_right .r_message .m_2 .m_pic {
-			background-position: -46px -77px;
-		}
-
-		.tz_content .t_right .r_message .m_3 .m_pic {
-			background-position: -96px -77px;
-		}
-
-		.tz_content .t_right .r_message .m_4 .m_pic {
-			background-position: -146px -77px;
-		}
-
-		.tz_content .t_right .r_message .m_5 .m_pic {
-			background-position: -190px -77px;
-		}
-
-		.tz_content .t_right .r_message .m_6 .m_pic {
-			background-position: -239px -77px;
-		}
-
-		.tz_content .t_right .r_message .m_7 .m_pic {
-			background-position: -288px -77px;
-		}
-
-		.tz_content .t_right .r_message .m_8 .m_pic {
-			background-position: -342px -77px;
-		}
-
-		.tz_content .t_right .r_message .m_9 .m_pic {
-			background-position: -395px -77px;
-		}
-
-		.tz_content .t_right .r_message .m_10 .m_pic {
-			background-position: -449px -77px;
-		}
-
+	
 		/*end r_message*/
 
 
@@ -322,7 +309,6 @@
 			width: 16px;
 			height: 14px;
 			display: block;
-			background: url("picture/ht_icon.png") no-repeat -386px -15px;
 			float: left;
 			margin: 12px;
 		}
@@ -367,7 +353,6 @@
 			width: 15px;
 			height: 14px;
 			display: block;
-			background: url("picture/ht_icon.png") no-repeat;
 			float: left;
 			margin-right: 10px;
 		}
@@ -451,7 +436,6 @@
 			display: block;
 			float: left;
 			margin-right: 2px;
-			background: url("picture/ht_icon.png") no-repeat;
 		}
 
 		.tz_content .t_right .r_table .r_table_list .t_tab tbody tr td .t_action a:hover {
@@ -559,5 +543,5 @@
 			.tz_content .t_right .r_table {
 				margin-left: 60px;
 			}
-
+			
 		}
