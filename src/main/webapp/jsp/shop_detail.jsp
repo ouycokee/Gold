@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %> 
 <link rel="icon" href="../img/clown.png" type="image/png">
 <!DOCTYPE html>
@@ -43,7 +44,8 @@
             width: 100%;
         }
         .shop_left_imgbig {
-            width: 100%;
+            width: 80%;
+            margin-left:20px;
             height: 100%;
             background-color: #fff;
             display: flex;
@@ -63,8 +65,7 @@
 			margin-top: 20px;
 		}
 		.shop_right_seleprice_center{
-			display: flex;
-			flex-wrap: wrap;
+			float: left;
 		}
 		.shop_right_seleprice_center_price{
 			margin-top: 10px;
@@ -88,7 +89,7 @@
 		}
 		.selected {
 			background-color: #faf6f1;
-		    border: 2px solid #862633;
+		    border: 1px solid #862633;
 		}
 		.shop_right_count_div{
 			display: flex;
@@ -146,6 +147,10 @@
 			border: none;
 			color:white;
 		}
+	    .shop_right_select_detail{
+	    	display:flex;
+	    	background-color:red;
+	    }
     </style>
 </head>
 <body>
@@ -154,7 +159,7 @@
 <div class="shop_detail">
     <div class="shop_left">
         <div class="shop_left_imglist">
-		    <c:forEach var="image" items="${listimg}">
+		    <c:forEach var="image" items="${listimgx}">
 		        <div class="imglist"><img src="../img/${image.imageUrl}" onclick="selectImage(this)"/></div>
 		    </c:forEach>
 		</div>
@@ -162,49 +167,34 @@
     </div>
     <div class="shop_right">
 		<div class="shop_right_title">
-			周大福 龙年生肖系列 行运一条龙黄金金章
+			<c:forEach var="name" items="${listnamex}">
+				${name.detail}
+			</c:forEach>
 		</div>
 		<div class="shop_right_price">
 			￥100.00
 		</div>
 		<div class="shop_right_seleprice">
 			<div class="shop_right_seleprice_div">
-				<div class="shop_right_seleprice_top">价格</div>
-				<div class="shop_right_seleprice_center">
-					<div class="shop_right_seleprice_center_price">
-						100.00
-					</div>
-					<div class="shop_right_seleprice_center_price">
-						200.00
-					</div>
-					<div class="shop_right_seleprice_center_price">
-						300.00
-					</div>
-					<div class="shop_right_seleprice_center_price">
-						400.00
-					</div>
-					<div class="shop_right_seleprice_center_price">
-						500.00
-					</div>
-					<div class="shop_right_seleprice_center_price">
-						600.00
-					</div>
-					<div class="shop_right_seleprice_center_price">
-						700.00
-					</div>
-					<div class="shop_right_seleprice_center_price">
-						800.00
-					</div>
-				</div>
+				<c:forEach var="specs" items="${listspeid}" varStatus="va">
+	                <div class="shop_right_seleprice_top">${specs.speName}</div>
+	                <c:forEach var="detail" items="${listdetail[va.index]}">
+		                    <div class="shop_right_seleprice_center">
+		                        <div class="shop_right_seleprice_center_price">
+		                            ${detail.detail}
+		                        </div>
+		                    </div>
+	                </c:forEach>
+	            </c:forEach>
 			</div>
-		</div>
+		</div>		            
 		<div class="shop_right_count_div">
 			<div class="shop_right_count_left">购买数量</div>
 			<div class="shop_right_count_right">
-				<div class="shop_right_count_right_kucun">1024库存</div>
+				<div class="shop_right_count_right_kucun">单次最大购买3个</div>
 				<div class="shop_right_count_right_shuliang">
 				    <button onclick="decreaseQuantity()">-</button>
-				    <input type="number" value="1" min="1" max="1024" onchange="updateQuantity(this.value)">
+				    <input type="number" value="1" min="1" max="3" onchange="updateQuantity(this.value)">
 				    <button onclick="increaseQuantity()">+</button>
 				</div> 
 			</div>
@@ -263,7 +253,7 @@
 	function increaseQuantity() {
 	    let input = document.querySelector('.shop_right_count_right_shuliang input');
 	    let currentValue = parseInt(input.value);
-	    let maxStock = 1024; // 库存数量，根据实际情况修改
+	    let maxStock = 3; // 库存数量，根据实际情况修改
 	    if (currentValue < maxStock) {
 	        input.value = currentValue + 1;
 	    }
@@ -272,7 +262,7 @@
 	function updateQuantity(value) {
 	    let input = document.querySelector('.shop_right_count_right_shuliang input');
 	    let newValue = parseInt(value);
-	    let maxStock = 1024; // 库存数量，根据实际情况修改
+	    let maxStock = 3; // 库存数量，根据实际情况修改
 	    if (newValue < 1) {
 	        input.value = 1;
 	    } else if (newValue > maxStock) {

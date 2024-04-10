@@ -29,7 +29,7 @@ public class HomeDAO extends baseDAO{
 		});
 	}
 	public List<ProductMessage> selectPror(){
-		String sql = "select * from products_message LIMIT 6,12";
+		String sql = "select * from products_message LIMIT 6,6";
 		return this.executeQuery(sql, new Mapper<ProductMessage>() {
 
 			@Override
@@ -62,7 +62,7 @@ public class HomeDAO extends baseDAO{
 	}
 	//热卖图片
 	public List<Image> selectre(){
-		String sql = "SELECT * FROM image LIMIT 6,12";
+		String sql = "SELECT * FROM image LIMIT 6,6";
 		return this.executeQuery(sql, new Mapper<Image>() {
 
 			@Override

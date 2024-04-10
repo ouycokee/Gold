@@ -1,7 +1,15 @@
 package entity;
 
+import java.util.Objects;
+
 public class Specs {
-    private int speId;
+
+	@Override
+	public String toString() {
+		return "Specs [speId=" + speId + ", proId=" + proId + ", speName=" + speName + "]";
+	}
+
+	private int speId;
     private int proId;
     private String speName;
 
