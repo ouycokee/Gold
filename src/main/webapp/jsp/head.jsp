@@ -121,11 +121,11 @@
 		margin-left:4px;
 	}
 	.body_right div:nth-child(1) i{
-		background-image: url(img/金价.png);
+		background-image: url(../img/金价.png);
 		background-size: cover;
 	}
 	.body_right div:nth-child(2) i{
-		background-image: url(img/登录注册.png);
+		background-image: url(../img/登录注册.png);
 		background-size: cover;
 	}
 	.head_login {
@@ -186,7 +186,7 @@
 	}
 
 	.body_right div:nth-child(3) i{
-		background-image: url(img/购物车.png);
+		background-image: url(../img/购物车.png);
 		background-size: cover;
 	}
 	.body_right div i {
@@ -298,7 +298,7 @@
 	    transition: width 0.5s, border-bottom-color 0.5s; /* 添加过渡效果 */
 		float: left;
 		background-color: rgb(248,248,248);
-		background-image: url(img/放大镜.png);
+		background-image: url(../img/放大镜.png);
 		background-repeat: no-repeat;
 		background-position-x: right;
 	}
@@ -387,7 +387,7 @@
 	  justify-content: space-evenly;
 	}
 	.zunxiangtiyan i {
-		background-image: url(img/主页钻石.png);
+		background-image: url(../img/主页钻石.png);
 		background-size: cover;
 		width: 30px;
 		height: 30px;
@@ -413,7 +413,7 @@
 		align-items: center;
 		width: 54px;
 		height: 54px;
-		background-image: url(img/箭头.png);
+		background-image: url(../img/箭头.png);
 		background-repeat: no-repeat;
 		background-size: 36px;
 		background-position: center;

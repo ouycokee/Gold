@@ -33,4 +33,27 @@ public class PriceDAO extends baseDAO{
 			
 		});
 	}
+	//根据规格详情查找价格
+	public List<Price> proPrice(Integer proid,String detils){
+		String sql = "SELECT price.price\r\n"
+				+ "FROM products_message pro\r\n"
+				+ "JOIN specs spe ON pro.Pro_id = spe.Pro_id\r\n"
+				+ "JOIN sdetail deta ON spe.Spe_id = deta.Spe_id\r\n"
+				+ "JOIN combination com ON deta.Deta_id = com.Deta_id\r\n"
+				+ "JOIN price ON com.Pri_id = price.Pri_id\r\n"
+				+ "WHERE pro.Pro_id = ?\r\n"
+				+ "AND deta.detail = ?";
+		return this.executeQuery(sql, new Mapper<Price>() {
+
+			@Override
+			public List<Price> map(ResultSet rs) throws SQLException {
+			    List<Price> list = new ArrayList<Price>();
+			    while (rs.next()) {
+			        Price price = new Price(rs.getInt(1),rs.getBigDecimal(1));
+			        list.add(price);
+			    }
+			    return list;
+			}
+		},proid,detils);
+	}
 }

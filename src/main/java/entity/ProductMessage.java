@@ -1,10 +1,18 @@
 package entity;
 
-import java.math.BigDecimal;
 
 public class ProductMessage {
   
-    private int proId;  
+
+	public ProductMessage(int proId, String proName, int categoryId, int proStatus) {
+		super();
+		this.proId = proId;
+		this.proName = proName;
+		this.categoryId = categoryId;
+		this.proStatus = proStatus;
+	}
+
+	private int proId;  
     private String proName;  
     private int categoryId;  
     private int proStatus;
@@ -64,17 +72,16 @@ public class ProductMessage {
 		return "ProductMessage [proId=" + proId + ", proName=" + proName + ", categoryId=" + categoryId + ", proStatus="
 				+ proStatus + ", detail=" + detail + "]";
 	}
-
-	public ProductMessage(int proId, String proName, int categoryId, int proStatus) {
-        super();
-        this.proId = proId;
-        this.proName = proName;
-        this.categoryId = categoryId;
-        this.proStatus = proStatus;
-    }
-    
     
 
+    public ProductMessage(int proId, String proName, int categoryId, int proStatus, String detail) {
+		super();
+		this.proId = proId;
+		this.proName = proName;
+		this.categoryId = categoryId;
+		this.proStatus = proStatus;
+		this.detail = detail;
+	}
 	public ProductMessage(int proId, String detail) {
 		super();
 		this.proId = proId;
@@ -84,5 +91,4 @@ public class ProductMessage {
 	public ProductMessage() {
         super();
     }  
-
 }

@@ -25,6 +25,10 @@ public class Price {
 	public Price() {
 		super();
 	}
-	 
+	@Override
+	public String toString() {
+		return "Price [priceId=" + priceId + ", price=" + price + "]";
+	}
+	
 	 
 }

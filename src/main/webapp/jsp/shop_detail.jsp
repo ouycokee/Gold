@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %> 
-<link rel="icon" href="../img/clown.png" type="image/png">
+<link rel="icon" href="../img/clown1.png" type="image/png">
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>商品详情</title>
+    <title>黄金珠宝商品详情</title>
     <style>
         .shop_detail {
             width: 100%;
@@ -151,7 +151,12 @@
 	    	display:flex;
 	    	background-color:red;
 	    }
+	    .empty-row {
+		    clear: both;
+		    height:10px;
+		}
     </style>
+    <script type="text/javascript" src = '../jquery.min.js'></script>
 </head>
 <body>
 
@@ -171,21 +176,21 @@
 				${name.detail}
 			</c:forEach>
 		</div>
-		<div class="shop_right_price">
-			￥100.00
-		</div>
+		<span class="shop_right_price"></span>
 		<div class="shop_right_seleprice">
 			<div class="shop_right_seleprice_div">
-				<c:forEach var="specs" items="${listspeid}" varStatus="va">
-	                <div class="shop_right_seleprice_top">${specs.speName}</div>
-	                <c:forEach var="detail" items="${listdetail[va.index]}">
-		                    <div class="shop_right_seleprice_center">
-		                        <div class="shop_right_seleprice_center_price">
-		                            ${detail.detail}
-		                        </div>
-		                    </div>
-	                </c:forEach>
-	            </c:forEach>
+			<c:forEach var="specs" items="${listspeid}" varStatus="va">
+			    <div class="shop_right_seleprice_top">${specs.speName}</div>
+			    <c:forEach var="detail" items="${listdetail[va.index]}" varStatus="vb">
+				        <div class="shop_right_seleprice_center">
+						    <div class="shop_right_seleprice_center_price ${va.first ? 'first' : 'second'}" data-proid="${proid}" data-detail="${detail.detail}">
+						        ${detail.detail}
+						    </div>
+						</div>
+			    </c:forEach>
+			    <div class="empty-row"></div>
+			</c:forEach>
+
 			</div>
 		</div>		            
 		<div class="shop_right_count_div">
@@ -194,43 +199,116 @@
 				<div class="shop_right_count_right_kucun">单次最大购买3个</div>
 				<div class="shop_right_count_right_shuliang">
 				    <button onclick="decreaseQuantity()">-</button>
-				    <input type="number" value="1" min="1" max="3" onchange="updateQuantity(this.value)">
+				    <input type="number" value="1" min="1" max="3" class="input_sum" onchange="updateQuantity(this.value)">
 				    <button onclick="increaseQuantity()">+</button>
 				</div> 
 			</div>
 		</div>
 		<div class="shop_right_btn">
 			<button class="shop_right_btn_left">加入购物车</button>
-			<button class="shop_right_btn_right">立即购买</button>
+			<a><button class="shop_right_btn_right">立即购买</button></a>
 		</div>
 	</div>
 </div>
 <hr>
 <%@include file="footer.jsp" %>
 <script>
+	function ajax(proid,detils){
+		$.getJSON('shopdetail',{
+			proid : proid,
+			detils : detils
+		},function(result){
+			var formatterResult = result.listpri[0].price;
+			$(".shop_right_price").text("￥"+formatterResult);
+		})
+	}
+</script>
+<script>
 	document.addEventListener("DOMContentLoaded", function() {
 	    var firstImage = document.querySelector('.imglist img');
 	    firstImage.classList.add('selected');
 	    document.getElementById('selectedImage').innerHTML = '<img src="' + firstImage.src + '" style="max-width:100%; max-height:100%;">';
 	});
+
 	
-	var shop_price_div = document.querySelectorAll('.shop_right_seleprice_center_price');
+	//加入购物车
+	var shop_cart = document.querySelectorAll('.shop_right_btn_left');
 	
-	shop_price_div.forEach(function(element) {
-	    element.addEventListener("click", function() {
+	shop_cart.forEach(function(element) {
+	    element.addEventListener("click", function(e) {
+	        // 获取当前选中的第一类价格元素的详细信息
+	        var detail1 = $('.shop_right_seleprice_center_price.first.selected').attr('data-detail');
+	        // 获取当前选中的第二类价格元素的详细信息
+	        var detail2 = $('.shop_right_seleprice_center_price.second.selected').attr('data-detail');
+	        
+	        var sum = $('.input_sum').val();
+	
+	        // 获取产品ID
+	        var proid = ${proid};
+	
+	        // 构建跳转URL
+	        var url = 'shopcart?detail1=' + detail1 + "&detail2=" + detail2 + "&proid=" + proid + "&sum=" + sum;
+	        
+	        // 执行跳转
+	        location.href = url;
+	    });
+	});
+
+
+	
+	var shop_price_first = document.querySelectorAll('.shop_right_seleprice_center_price.first');
+	var shop_price_second = document.querySelectorAll('.shop_right_seleprice_center_price.second');
+	
+	
+
+	shop_price_first.forEach(function(element) {
+	    element.addEventListener("click", function(e) {
 	        // 移除所有价格元素的选中状态
-	        shop_price_div.forEach(function(el) {
+	        document.querySelectorAll('.shop_right_seleprice_center_price.first').forEach(function(el) {
 	            el.classList.remove('selected');
 	        });
 	        // 添加当前点击的价格元素的选中状态
 	        element.classList.add('selected');
-	
+
+	        // 更新当前选中的价格元素
+	        selectedPriceElement = element;
+	        //alert($('.shop_right_seleprice_center_price.second').eq(0).attr('data-detail'));	
+			//location.href = 'promessage?detail='+$('.shop_right_seleprice_center_price').eq(0).attr('detail')+"&id=1";
 	        // 获取选中价格的值
 	        var price = element.innerText.trim();
-	        // 设置选中价格到shop_right_price中
-	        document.querySelector('.shop_right_price').innerText = "￥"+price;
+	        
+	        e.preventDefault();
+	        var proid = $(this).data("proid");
+	        var detail = $(this).data("detail");
+	        ajax(proid, detail);
 	    });
 	});
+
+
+	// 为第二类价格元素添加点击事件监听器
+	shop_price_second.forEach(function(element) {
+	    element.addEventListener("click", function(e) {
+	        // 移除所有价格元素的选中状态
+	        document.querySelectorAll('.shop_right_seleprice_center_price.second').forEach(function(el) {
+	            el.classList.remove('selected');
+	        });
+	        // 添加当前点击的价格元素的选中状态
+	        element.classList.add('selected');
+
+	        // 更新当前选中的价格元素
+	        selectedPriceElement = element;
+
+	        // 获取选中价格的值
+	        var price = element.innerText.trim();
+	        
+	        e.preventDefault();
+	        var proid = $(this).attr("data-proid");
+	        var detail = $(this).attr("data-detail");
+	        ajax(proid,detail);
+	    });
+	});
+
+
 	
 	function selectImage(image) {
 	    let selectedImg = document.querySelector('.imglist img.selected');
@@ -269,6 +347,21 @@
 	        input.value = maxStock;
 	    }
 	}
+	document.addEventListener("DOMContentLoaded", function() {
+	    // 默认选中第一个价格元素
+	    var default1 = document.querySelector('.shop_right_seleprice_center_price.first');
+	    default1.classList.add('selected');
+
+	    // 触发默认选中价格元素的点击事件
+	    default1.click();
+	});
+	document.addEventListener("DOMContentLoaded", function() {
+	    var default2 = document.querySelector('.shop_right_seleprice_center_price.second');
+	    default2.classList.add('selected');
+
+	    // 触发默认选中价格元素的点击事件
+	    default2.click();
+	});
 
 </script>
 

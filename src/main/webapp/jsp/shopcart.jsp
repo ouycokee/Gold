@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %> 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<title>购物车</title>
-		<link rel="icon" href="../img/clown.png" type="image/png">
+		<link rel="icon" href="../img/clown1.png" type="image/png">
 	</head>
 	<link href="//unpkg.com/layui@2.9.7/dist/css/layui.css" rel="stylesheet">
 	<script src="js/jquery.min.js"></script>
@@ -932,39 +934,37 @@
                     </div>
                 </div>
             </div>
-            <div class="cart_body">
-                <img class="cart_list_img" src="../img/复选no.png" />
-                <img class="cart_img_dindan" src="../img/dingdan.jpg" />
-                <div class="cart_list_details">
-                    <div class="cart_list_details_title">
-                        <div class="cart_list_details_name">商品名字商品名字商品名字</div>
-                        <div class="cart_list_details_price">￥999.00</div>
-                    </div>
-                    <div class="cart_list_details_guige">链长:40cm</div>
-                    <div class="cart_list_details_guige">数量:1</div>
-                    <div class="cart_list_details_btn">
-                        <div class="cart_list_details_btn_cz">编辑</div>
-                        <div class="cart_list_details_btn_cz">移除</div>
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <div class="cart_body">
-                <img class="cart_list_img" src="../img/复选no.png" />
-                <img class="cart_img_dindan" src="../img/dingdan.jpg" />
-                <div class="cart_list_details">
-                    <div class="cart_list_details_title">
-                        <div class="cart_list_details_name">商品名字商品名字商品名字</div>
-                        <div class="cart_list_details_price">￥999.00</div>
-                    </div>
-                    <div class="cart_list_details_guige">链长:40cm</div>
-                    <div class="cart_list_details_guige">数量:1</div>
-                    <div class="cart_list_details_btn">
-                        <div class="cart_list_details_btn_cz">编辑</div>
-                        <div class="cart_list_details_btn_cz">移除</div>
-                    </div>
-                </div>
-            </div>
+	            <div class="cart_body">
+	                <img class="cart_list_img" src="../img/复选no.png" class="select_btn"/>
+            		<c:forEach var = "img" items="${listimg}">
+	                	<img class="cart_img_dindan" src="../img/${img.imageUrl}" />
+            		</c:forEach>
+	                <div class="cart_list_details">
+	                    <div class="cart_list_details_title">
+            			<c:forEach var = "name" items="${listshopname}">
+	                        <div class="cart_list_details_name">${name.proName }</div>
+            			</c:forEach>
+	                        <div class="cart_list_details_price">￥999.00</div>
+	                    </div>
+						<c:forEach var="name" items="${listspename}" varStatus="loop">
+						    <div class="cart_list_details_guige">
+						        ${name.speName}: 
+						        <c:choose>
+						            <c:when test="${loop.index == 0}">
+						                ${detail1}
+						            </c:when>
+						            <c:when test="${loop.index == 1}">
+						                ${detail2}
+						            </c:when>
+						        </c:choose>
+						    </div>
+						</c:forEach>
+	                    <div class="cart_list_details_btn">
+	                        <div class="cart_list_details_btn_cz">编辑</div>
+	                        <div class="cart_list_details_btn_cz">移除</div>
+	                    </div>
+	                </div>
+	            </div>
             <hr />
         </div>
         <div id="cart_hz_right">
@@ -1061,113 +1061,138 @@
 	</footer>
 		
 		
-		<script>
-			const huidaodingduan = document.querySelector('.huidaodingduan');
-			huidaodingduan.addEventListener('click', function() {
-				    // 平滑滚动到页面顶部
-				    window.scrollTo({
-				        top: 0,
-				        behavior: 'smooth'
-				    });
-				});
-				if (huidaodingduan) {
-					window.addEventListener('scroll', function() {
-						scrollCount++;
-						if (scrollCount >= 2) {
-							huidaodingduan.style.display = 'block';
-						}
-						
-						// 检查用户是否滚动到页面顶部
-						if (window.scrollY === 0) {
-							huidaodingduan.style.display = 'none';
-						}
-					});
-					
-					// 监听鼠标滚轮事件
-					window.addEventListener('wheel', function() {
-						// 如果用户滚回到页面顶部，隐藏按钮
-						if (window.scrollY === 0) {
-							huidaodingduan.style.display = 'none';
-						}
-					});
-				}
-		</script>
-
-
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+		    var count = 0;
+		    var cartBody = document.querySelector('.cart_body');
+		    cartBody.addEventListener('click', function(event) {
+		        var target = event.target;
+		        if (target.classList.contains('cart_list_img')) {
+		            toggleImage(target);
+		        }
+		    });
 		
+		    function toggleImage(img) {
+		        count++;
+		        if (count % 2 !== 0) {
+		            img.src = '../img/复选yes.png'; // 切换图片路径
+		            img.classList.add('selected'); // 添加选中属性
+		        } else {
+		            img.src = '../img/复选no.png'; // 切换回原始图片路径
+		            img.classList.remove('selected'); // 移除选中属性
+		        }
+		    }
+		});
+		</script>	
+	
 		
-		
-		<script src="//unpkg.com/layui@2.9.7/dist/layui.js"></script>
-		<script>
-			let scrollCount = 0;
-			const hoverBoxes = document.querySelectorAll('.hover_box');
-			const sousuo = document.querySelectorAll('.sousuo');
-			const hoverDives =document.querySelectorAll('.head_hover')
-			hoverBoxes.forEach(hoverBox => {
-			    const parentLi = hoverBox.parentElement;
-			
-			    parentLi.addEventListener('mouseover', function() {
-			        hoverBox.style.display = 'block';
-			    });
-			
-			    parentLi.addEventListener('mouseout', function() {
-			        hoverBox.style.display = 'none';
+	<script>
+		const huidaodingduan = document.querySelector('.huidaodingduan');
+		huidaodingduan.addEventListener('click', function() {
+			    // 平滑滚动到页面顶部
+			    window.scrollTo({
+			        top: 0,
+			        behavior: 'smooth'
 			    });
 			});
-			sousuo.forEach(sousuo =>{
-				const ss = document.querySelector('.sous');
-				let num = 1;
-				ss.addEventListener('click',function(){
-					num+=1;
-					if(num%2==0){
-						sousuo.style.display = 'block';
-					}else{
-						sousuo.style.display = 'none';
+			if (huidaodingduan) {
+				window.addEventListener('scroll', function() {
+					scrollCount++;
+					if (scrollCount >= 2) {
+						huidaodingduan.style.display = 'block';
 					}
-				})
-			});
-			hoverDives.forEach(hoverDiv=>{
-				const pdiv = hoverDiv.parentElement;
-				pdiv.addEventListener('mouseover', function() {
-				    hoverDiv.style.display = 'block';
-				});
-						
-				pdiv.addEventListener('mouseout', function() {
-				    hoverDiv.style.display = 'none';
-				});
-			});
-		</script>
-		<script>
-			const huidaodingduan = document.querySelector('.huidaodingduan');
-			huidaodingduan.addEventListener('click', function() {
-				    // 平滑滚动到页面顶部
-				    window.scrollTo({
-				        top: 0,
-				        behavior: 'smooth'
-				    });
-				});
-				if (huidaodingduan) {
-					window.addEventListener('scroll', function() {
-						scrollCount++;
-						if (scrollCount >= 2) {
-							huidaodingduan.style.display = 'block';
-						}
-						
-						// 检查用户是否滚动到页面顶部
-						if (window.scrollY === 0) {
-							huidaodingduan.style.display = 'none';
-						}
-					});
 					
-					// 监听鼠标滚轮事件
-					window.addEventListener('wheel', function() {
-						// 如果用户滚回到页面顶部，隐藏按钮
-						if (window.scrollY === 0) {
-							huidaodingduan.style.display = 'none';
-						}
-					});
+					// 检查用户是否滚动到页面顶部
+					if (window.scrollY === 0) {
+						huidaodingduan.style.display = 'none';
+					}
+				});
+				
+				// 监听鼠标滚轮事件
+				window.addEventListener('wheel', function() {
+					// 如果用户滚回到页面顶部，隐藏按钮
+					if (window.scrollY === 0) {
+						huidaodingduan.style.display = 'none';
+					}
+				});
+			}
+	</script>
+	
+	
+	
+	
+	
+	<script src="//unpkg.com/layui@2.9.7/dist/layui.js"></script>
+	<script>
+		let scrollCount = 0;
+		const hoverBoxes = document.querySelectorAll('.hover_box');
+		const sousuo = document.querySelectorAll('.sousuo');
+		const hoverDives =document.querySelectorAll('.head_hover')
+		hoverBoxes.forEach(hoverBox => {
+		    const parentLi = hoverBox.parentElement;
+		
+		    parentLi.addEventListener('mouseover', function() {
+		        hoverBox.style.display = 'block';
+		    });
+		
+		    parentLi.addEventListener('mouseout', function() {
+		        hoverBox.style.display = 'none';
+		    });
+		});
+		sousuo.forEach(sousuo =>{
+			const ss = document.querySelector('.sous');
+			let num = 1;
+			ss.addEventListener('click',function(){
+				num+=1;
+				if(num%2==0){
+					sousuo.style.display = 'block';
+				}else{
+					sousuo.style.display = 'none';
 				}
-		</script>
+			})
+		});
+		hoverDives.forEach(hoverDiv=>{
+			const pdiv = hoverDiv.parentElement;
+			pdiv.addEventListener('mouseover', function() {
+			    hoverDiv.style.display = 'block';
+			});
+					
+			pdiv.addEventListener('mouseout', function() {
+			    hoverDiv.style.display = 'none';
+			});
+		});
+	</script>
+	<script>
+		const huidaodingduan = document.querySelector('.huidaodingduan');
+		huidaodingduan.addEventListener('click', function() {
+			    // 平滑滚动到页面顶部
+			    window.scrollTo({
+			        top: 0,
+			        behavior: 'smooth'
+			    });
+			});
+			if (huidaodingduan) {
+				window.addEventListener('scroll', function() {
+					scrollCount++;
+					if (scrollCount >= 2) {
+						huidaodingduan.style.display = 'block';
+					}
+					
+					// 检查用户是否滚动到页面顶部
+					if (window.scrollY === 0) {
+						huidaodingduan.style.display = 'none';
+					}
+				});
+				
+				// 监听鼠标滚轮事件
+				window.addEventListener('wheel', function() {
+					// 如果用户滚回到页面顶部，隐藏按钮
+					if (window.scrollY === 0) {
+						huidaodingduan.style.display = 'none';
+					}
+				});
+			}
+	</script>
 
 	</body>
 </html>

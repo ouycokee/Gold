@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %> 
-<link rel="icon" href="../img/clown.png" type="image/png">
+<link rel="icon" href="../img/clown1.png" type="image/png">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,7 +98,7 @@
 		width: 98px;
 		 height: 56px;
 		 cursor: pointer;
-		 background-image: url(img/clown.png);
+		 background-image: url(../img/clown.png);
 		 background-repeat: no-repeat;
 		 background-size: cover;
 	}
@@ -124,11 +124,11 @@
 		margin-left:4px;
 	}
 	.body_right div:nth-child(1) i{
-		background-image: url(img/金价.png);
+		background-image: url(../img/金价.png);
 		background-size: cover;
 	}
 	.body_right div:nth-child(2) i{
-		background-image: url(img/登录注册.png);
+		background-image: url(../img/登录注册.png);
 		background-size: cover;
 	}
 	.head_login {
