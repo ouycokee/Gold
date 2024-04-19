@@ -130,7 +130,7 @@
 		}
 		.shop_right_btn{
 			display: flex;
-			margin-top: 30px;
+			margin-top: 25%;
 		}
 		.shop_right_btn_left,.shop_right_btn_right{
 			width: 207px;
@@ -165,7 +165,7 @@
     <div class="shop_left">
         <div class="shop_left_imglist">
 		    <c:forEach var="image" items="${listimgx}">
-		        <div class="imglist"><img src="../img/${image.imageUrl}" onclick="selectImage(this)"/></div>
+		        <div class="imglist"><img src="../img/${image.imageUrl}" image="${image.imageUrl}" onclick="selectImage(this)"/></div>
 		    </c:forEach>
 		</div>
         <div class="shop_left_imgbig" id="selectedImage"></div>
@@ -180,7 +180,7 @@
 		<div class="shop_right_seleprice">
 			<div class="shop_right_seleprice_div">
 			<c:forEach var="specs" items="${listspeid}" varStatus="va">
-			    <div class="shop_right_seleprice_top">${specs.speName}</div>
+			    <div class="shop_right_seleprice_top" spename = "${specs.speName}">${specs.speName}</div>
 			    <c:forEach var="detail" items="${listdetail[va.index]}" varStatus="vb">
 				        <div class="shop_right_seleprice_center">
 						    <div class="shop_right_seleprice_center_price ${va.first ? 'first' : 'second'}" data-proid="${proid}" data-detail="${detail.detail}">
@@ -192,18 +192,7 @@
 			</c:forEach>
 
 			</div>
-		</div>		            
-		<div class="shop_right_count_div">
-			<div class="shop_right_count_left">购买数量</div>
-			<div class="shop_right_count_right">
-				<div class="shop_right_count_right_kucun">单次最大购买3个</div>
-				<div class="shop_right_count_right_shuliang">
-				    <button onclick="decreaseQuantity()">-</button>
-				    <input type="number" value="1" min="1" max="3" class="input_sum" onchange="updateQuantity(this.value)">
-				    <button onclick="increaseQuantity()">+</button>
-				</div> 
-			</div>
-		</div>
+		</div>		     
 		<div class="shop_right_btn">
 			<button class="shop_right_btn_left">加入购物车</button>
 			<a><button class="shop_right_btn_right">立即购买</button></a>
@@ -222,8 +211,8 @@
 			$(".shop_right_price").text("￥"+formatterResult);
 		})
 	}
-</script>
-<script>
+	
+	
 	document.addEventListener("DOMContentLoaded", function() {
 	    var firstImage = document.querySelector('.imglist img');
 	    firstImage.classList.add('selected');
@@ -236,18 +225,34 @@
 	
 	shop_cart.forEach(function(element) {
 	    element.addEventListener("click", function(e) {
-	        // 获取当前选中的第一类价格元素的详细信息
-	        var detail1 = $('.shop_right_seleprice_center_price.first.selected').attr('data-detail');
-	        // 获取当前选中的第二类价格元素的详细信息
+	      	//获取规格和名字
+			var shopname = $('.shop_right_title').text();
+			var detail1 = $('.shop_right_seleprice_center_price.first.selected').attr('data-detail');
 	        var detail2 = $('.shop_right_seleprice_center_price.second.selected').attr('data-detail');
-	        
-	        var sum = $('.input_sum').val();
-	
-	        // 获取产品ID
+	        var spenames = [];
+	        $('.shop_right_seleprice_top').each(function() {
+	            var spename = $(this).attr('spename'); // 获取当前元素的 spename 属性值
+	            spenames.push(spename); // 将该值添加到数组中
+	        });
+	        //商品id
 	        var proid = ${proid};
-	
-	        // 构建跳转URL
-	        var url = 'shopcart?detail1=' + detail1 + "&detail2=" + detail2 + "&proid=" + proid + "&sum=" + sum;
+	        //图片路径
+	        var image = $('.imglist img').attr('image');
+	        //商品名字加规格
+	        var cname = null;
+	        if(detail2 == null){
+	        	cname = shopname + "," + detail1;
+	        }else{
+	        	cname = shopname + "," + detail1 + "," + detail2;
+	        }
+
+			// 如果spenames不为空，则拼接到cname中
+	        //用户id
+	        var id = 1;
+	        //价格
+	        var priceText = $('.shop_right_price').text();
+	        var cprice = priceText.substring(priceText.indexOf('￥') + 1);
+	        var url = 'shopcart?proid=' + proid + "&image=" + image +"&cname=" + cname + "&id=" + id +"&cprice=" + cprice + "&spenames=" + spenames;
 	        
 	        // 执行跳转
 	        location.href = url;
@@ -258,8 +263,6 @@
 	
 	var shop_price_first = document.querySelectorAll('.shop_right_seleprice_center_price.first');
 	var shop_price_second = document.querySelectorAll('.shop_right_seleprice_center_price.second');
-	
-	
 
 	shop_price_first.forEach(function(element) {
 	    element.addEventListener("click", function(e) {
@@ -309,7 +312,7 @@
 	});
 
 
-	
+	//选择h
 	function selectImage(image) {
 	    let selectedImg = document.querySelector('.imglist img.selected');
 	    if (selectedImg) {

@@ -34,6 +34,7 @@ public class ProductMessageServlet extends HttpServlet {
 		List<ProductMessage> listnamex = prodao.selectShopName(Integer.parseInt(proid));
 		req.setAttribute("listnamex", listnamex);
 		req.setAttribute("listimgx", listimgx);
+		
 		//获取规格id
 		List<Specs> listspeid = prodao.selectSpecs(Integer.parseInt(proid));
 		//根据规格id循环查详情

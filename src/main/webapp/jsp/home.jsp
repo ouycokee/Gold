@@ -609,7 +609,7 @@
 				<div class="body_right">
 					<div><i></i><a>今日金价</a></div>
 					<div class="denglu"><i></i><a>name</a>
-					<div><i></i><a>购物袋</a></div>
+					<div><i></i><a href="shopcartzj">购物袋</a></div>
 				</div>
 			</div>
 		</div>
