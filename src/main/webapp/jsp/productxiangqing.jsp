@@ -94,10 +94,10 @@
 					<tr>
 						<th></th>
 						<th>Id</th>
-						<th>用户名</th>
-						<th>密码</th>
+						<th>商品名称</th>
+						<th>分类Id</th>
 						<th>邮箱</th>
-						<th>性别</th>
+						<th>商品状态</th>
 						<th>出生日期</th>
 					</tr>
 					<c:forEach items="${order}" var="i">

@@ -31,7 +31,7 @@ public class productServlet extends HttpServlet {
 		System.out.println(curpage);
 		int pagesize = Integer.parseInt(pagesizeString);
 		System.out.println(pagesize);
-		Map<String, Object> m = hdao.productByPage(curpage, pagesize, "select * from products_message limit ?,?", "select count(*) from products_message");
+		Map<String, Object> m = hdao.productByPage(curpage, pagesize, "SELECT * FROM Products_message p INNER JOIN Category c ON p.`Cate_id`=c.`Cate_id` ORDER BY p.`Pro_id` DESC limit ?,?", "select count(*) from products_message");
 		List l = (List) m.get("list");
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("pagesize", pagesize);
