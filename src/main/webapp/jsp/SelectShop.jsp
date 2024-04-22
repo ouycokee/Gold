@@ -67,10 +67,7 @@
 		</style>
 	</head>
 <%@include file="head.jsp" %>
-	<body>
-		<main id = "main">
-			<h2 class="main_title">搜索结果</h2>
-			<img class="main_title_img" src="img/主页钻石.png"/>
+	<body> 
 			<ul class="main_ul">
 				<li class="main_li">
 					<img src="img/新品上市1.jpg"/>
