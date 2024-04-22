@@ -85,11 +85,7 @@ public class baseDAO {
 	public Connection getConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-<<<<<<< HEAD
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gold?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8", "root", "123456");
-=======
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Gold?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8", "root", "123456");
->>>>>>> branch 'master' of git@github.com:ouycokee/Gold.git
 			return conn;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
