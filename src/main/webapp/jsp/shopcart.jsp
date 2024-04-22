@@ -725,7 +725,7 @@
 		</div>
 		<nav>
 		    <ul>
-		        <li><a href="#">首页</a></li>
+		        <li><a href="home">首页</a></li>
 		        <li>
 		            <a href="#">全部商品</a>
 		            <div class="hover_box">
