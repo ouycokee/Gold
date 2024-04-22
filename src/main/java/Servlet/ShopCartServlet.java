@@ -30,7 +30,7 @@ public class ShopCartServlet extends HttpServlet{
 		String id = req.getParameter("proid");
 		int proid = Integer.parseInt(id);
 		//用户id
-		int uid = 2;
+		int uid = 1;
 		//图片
 		String image = req.getParameter("image");
 		//价格

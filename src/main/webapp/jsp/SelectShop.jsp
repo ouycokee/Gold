@@ -69,7 +69,7 @@
 <%@include file="head.jsp" %>
 	<body>
 		<main id = "main">
-			<h2 class="main_title">新品上市</h2>
+			<h2 class="main_title">搜索结果</h2>
 			<img class="main_title_img" src="img/主页钻石.png"/>
 			<ul class="main_ul">
 				<li class="main_li">
