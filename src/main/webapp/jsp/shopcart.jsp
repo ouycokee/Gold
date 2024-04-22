@@ -929,7 +929,7 @@
 <div id="cart_hz">
     <div id="cart_hz_center">
         <div id="cart_hz_left">
-            <p>我的购物袋(${cartsum})</p>
+            <p>我的购物袋(${zcount})</p>
             <div class="cart_list">
                 <div class="cart_list_head">
                     <div class="cart_list_head_left">
@@ -965,7 +965,7 @@
 			                </div>
 			            </c:forEach> --%>
 			            <div class="cart_list_details_guige" id="shuliang">
-			                数量：${listc.ccount}
+			                数量：${zcount}
 			            </div>
 			            <div class="cart_list_details_btn">
 			                <div class="cart_list_details_btn_cz">
@@ -1035,7 +1035,7 @@
             </div>
             <div class="count_btn">
                 <button class="jiesuan_btn">去结算</button>
-                <button class="gouwu_btn">继续购物</button>
+                <a href="home"><button class="gouwu_btn">继续购物</button></a>
             </div>
         </div>
     </div>
