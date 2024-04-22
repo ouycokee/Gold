@@ -1,7 +1,12 @@
 package entity;
 
 public class Image {
-    private int imageId;
+    public Image(String imageUrl) {
+		super();
+		this.imageUrl = imageUrl;
+	}
+
+	private int imageId;
     private String imageUrl;
     private int proId;
 
@@ -37,4 +42,9 @@ public class Image {
     public void setProId(int proId) {
         this.proId = proId;
     }
+
+	@Override
+	public String toString() {
+		return "Image [imageId=" + imageId + ", imageUrl=" + imageUrl + ", proId=" + proId + "]";
+	}
 }

@@ -11,17 +11,29 @@
   	<servlet-class>Servlet.a</servlet-class>
   </servlet>
   <servlet>
+<<<<<<< HEAD
   	<servlet-name>GuanliyuanServlet</servlet-name>
   	<display-name>GuanliyuanServlet</display-name>
   	<description></description>
   	<servlet-class>Servlet.GuanliyuanServlet</servlet-class>
+=======
+  	<servlet-name>demo</servlet-name>
+  	<display-name>demo</display-name>
+  	<description></description>
+  	<servlet-class>Servlet.demo</servlet-class>
+>>>>>>> branch 'master' of git@github.com:ouycokee/Gold.git
   </servlet>
   <servlet-mapping>
   	<servlet-name>a</servlet-name>
   	<url-pattern>/a</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+<<<<<<< HEAD
   	<servlet-name>GuanliyuanServlet</servlet-name>
   	<url-pattern>/GuanliyuanServlet</url-pattern>
+=======
+  	<servlet-name>demo</servlet-name>
+  	<url-pattern>/demo</url-pattern>
+>>>>>>> branch 'master' of git@github.com:ouycokee/Gold.git
   </servlet-mapping>
 </web-app>

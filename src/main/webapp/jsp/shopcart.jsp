@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %> 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<title>购物车</title>
-		<link rel="icon" href="../img/clown.png" type="image/png">
+		<link rel="icon" href="../img/clown1.png" type="image/png">
 	</head>
 	<link href="//unpkg.com/layui@2.9.7/dist/css/layui.css" rel="stylesheet">
-	<script src="js/jquery.min.js"></script>
+	<script src="../jquery.min.js"></script>
 	<script>
 		$(document).ready(function() {
 		  $('.sousuo').on('input', function() {
@@ -417,7 +419,7 @@
 		}
 		.cart_list_details{
 			width: 642px;
-			height: 190px;
+			height: 150px;
 		}
 		.cart_list_details_title{
 			display: flex;
@@ -430,18 +432,19 @@
 		}
 		.cart_list_details_price{
 			line-height: 30px;
-			margin-right: 10%;
+			margin-right: 7%;
+			font-size:16px;
 			color: #862633;
 		}
 		.cart_list_details_guige{
 			color: dimgray;
-			font-size: 14px;
+			font-size: 12px;
 			margin-top: 15px;
 		}
 		.cart_list_details_btn{
 			width: 100%;
 			height: 30px;
-			margin-top: 6%;
+			margin-top: 9%;
 			display: flex;
 		}
 		.cart_list_details_btn_cz{
@@ -667,6 +670,13 @@
 				line-height: 33px;
 				margin:5px 0 20px 0;
 			}
+			.input_number{
+				width: 40px;
+				height: 20px;
+			    border: 1px solid #ccc;
+			    text-align: center;
+			    font-size:12px;
+			}
 	</style>
 <body>
 	<div class="xian" id="xian"></div>
@@ -694,7 +704,7 @@
 				<div class="body_right">
 					<div><i></i><a>今日金价</a></div>
 					<div class="denglu"><i></i><a>name</a>
-					<div><i></i><a>购物袋</a></div>
+					<div><i></i><a href="shopcartzj">购物袋</a></div>
 				</div>
 			</div>
 		</div>
@@ -715,7 +725,7 @@
 		</div>
 		<nav>
 		    <ul>
-		        <li><a href="#">首页</a></li>
+		        <li><a href="home">首页</a></li>
 		        <li>
 		            <a href="#">全部商品</a>
 		            <div class="hover_box">
@@ -919,11 +929,11 @@
 <div id="cart_hz">
     <div id="cart_hz_center">
         <div id="cart_hz_left">
-            <p>我的购物袋(数量)</p>
+            <p>我的购物袋</p>
             <div class="cart_list">
                 <div class="cart_list_head">
                     <div class="cart_list_head_left">
-                        <img src="../img/复选no.png" class="cart_list_img" />
+                        <img src="../img/复选no.png" class="cart_list_img">
                         <div class="cart_list_font">全选</div>
                     </div>
                     <div class="cart_list_head_right">
@@ -932,41 +942,84 @@
                     </div>
                 </div>
             </div>
-            <div class="cart_body">
-                <img class="cart_list_img" src="../img/复选no.png" />
-                <img class="cart_img_dindan" src="../img/dingdan.jpg" />
-                <div class="cart_list_details">
-                    <div class="cart_list_details_title">
-                        <div class="cart_list_details_name">商品名字商品名字商品名字</div>
-                        <div class="cart_list_details_price">￥999.00</div>
-                    </div>
-                    <div class="cart_list_details_guige">链长:40cm</div>
-                    <div class="cart_list_details_guige">数量:1</div>
-                    <div class="cart_list_details_btn">
-                        <div class="cart_list_details_btn_cz">编辑</div>
-                        <div class="cart_list_details_btn_cz">移除</div>
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <div class="cart_body">
-                <img class="cart_list_img" src="../img/复选no.png" />
-                <img class="cart_img_dindan" src="../img/dingdan.jpg" />
-                <div class="cart_list_details">
-                    <div class="cart_list_details_title">
-                        <div class="cart_list_details_name">商品名字商品名字商品名字</div>
-                        <div class="cart_list_details_price">￥999.00</div>
-                    </div>
-                    <div class="cart_list_details_guige">链长:40cm</div>
-                    <div class="cart_list_details_guige">数量:1</div>
-                    <div class="cart_list_details_btn">
-                        <div class="cart_list_details_btn_cz">编辑</div>
-                        <div class="cart_list_details_btn_cz">移除</div>
-                    </div>
-                </div>
-            </div>
+            <c:forEach items="${listcart}" var="listc">
+			    <div class="cart_body">
+			        <img class="cart_list_img" src="../img/复选no.png" class="select_btn" />
+			        <img class="cart_img_dindan" src="../img/${listc.image}" />
+			        <div class="cart_list_details">
+			            <div class="cart_list_details_title">
+			                <div class="cart_list_details_name">${listc.cname}</div>
+			                <div class="cart_list_details_price">￥${listc.cprice}</div>
+			            </div>
+			            <%-- <c:forEach var="name" items="${listspename}" varStatus="loop">
+			                <div class="cart_list_details_guige">
+			                    ${name.speName}: 
+			                    <c:choose>
+			                        <c:when test="${loop.index == 0}">
+			                            ${detail1}
+			                        </c:when>
+			                        <c:when test="${loop.index == 1}">
+			                            ${detail2}
+			                        </c:when>
+			                    </c:choose>
+			                </div>
+			            </c:forEach> --%>
+			            <div class="cart_list_details_guige" id="shuliang">
+			                数量：${listc.ccount}
+			            </div>
+			            <div class="cart_list_details_btn">
+			                <div class="cart_list_details_btn_cz">
+			                    <input type="number" value="${listc.ccount}" min="1" max="5" inprice="${listc.cprice}" class="input_number" onclick="updateQuantity(this)">
+			                    <script>
+			                        $(document).ready(function() {
+			                            $('.input_number').each(function() {
+			                                updateQuantity(this);
+			                            });
+			
+			                            $('.input_number').change(function() {
+			                                updateQuantity(this);
+			                            });
+			                        });
+			                    </script>
+			                </div>
+			                <div class="cart_list_details_btn_cz delete_btn" cid="${listc.cid}">移除</div>
+			                <script>
+							    $(document).ready(function() {
+							        // 给每个删除按钮添加点击事件
+							        $('.delete_btn').click(function() {
+							            var result = confirm("确定要删除吗？");
+							
+							            if (result) {
+							                var cid = $(this).attr('cid');
+							                ajaxDeleteAndUpdate(cid); // 调用删除并更新的函数
+							            }
+							        });
+							    });
+							
+							    function ajaxDeleteAndUpdate(cid) {
+							        // 发送 AJAX 请求删除商品
+							        $.ajax({
+							            type: 'GET',
+							            url: 'shopdele', // 修改为您的删除商品的后端处理 URL
+							            data: { cid: cid },
+							            success: function(data) {
+							                // 删除成功后，更新页面的特定部分
+							                // 这里可以根据需要更新整个购物车部分或者只更新被删除商品的部分
+							                location.reload(); // 示例中直接重新加载整个页面
+							            },
+							            error: function(xhr, status, error) {
+							                console.error('删除操作失败:', error);
+							            }
+							        });
+							    }
+							</script>
+			            </div>
+			        </div>
+			    </div>
+			</c:forEach>
             <hr />
         </div>
+        
         <div id="cart_hz_right">
             <div class="cart_jiesuan_title">
                 <div class="dindanyilan">订单一览</div>
@@ -1059,115 +1112,259 @@
 	<footer>
 		<p>Gold珠宝（股份代号：9999）· 香港主板上市公司Copyright © 2016深圳市绍福电子商务有限公司版权所有   粤B2-20110210   粤ICP备11010408号广东省深圳市盐田区深盐路2011号周大福集团大厦15楼</p>
 	</footer>
-		
-		
-		<script>
-			const huidaodingduan = document.querySelector('.huidaodingduan');
-			huidaodingduan.addEventListener('click', function() {
-				    // 平滑滚动到页面顶部
-				    window.scrollTo({
-				        top: 0,
-				        behavior: 'smooth'
-				    });
-				});
-				if (huidaodingduan) {
-					window.addEventListener('scroll', function() {
-						scrollCount++;
-						if (scrollCount >= 2) {
-							huidaodingduan.style.display = 'block';
-						}
-						
-						// 检查用户是否滚动到页面顶部
-						if (window.scrollY === 0) {
-							huidaodingduan.style.display = 'none';
-						}
-					});
-					
-					// 监听鼠标滚轮事件
-					window.addEventListener('wheel', function() {
-						// 如果用户滚回到页面顶部，隐藏按钮
-						if (window.scrollY === 0) {
-							huidaodingduan.style.display = 'none';
-						}
-					});
-				}
-		</script>
+	
 
 
-		
-		
-		
-		<script src="//unpkg.com/layui@2.9.7/dist/layui.js"></script>
-		<script>
-			let scrollCount = 0;
-			const hoverBoxes = document.querySelectorAll('.hover_box');
-			const sousuo = document.querySelectorAll('.sousuo');
-			const hoverDives =document.querySelectorAll('.head_hover')
-			hoverBoxes.forEach(hoverBox => {
-			    const parentLi = hoverBox.parentElement;
+	<!-- 全选 -->
+	<script>
+	    document.addEventListener('DOMContentLoaded', function() {
+	        //全选
+	        var selectAll = document.querySelector('.cart_list_head_left .cart_list_img');
+	        //单选
+	        var cartImages = document.querySelectorAll('.cart_body .cart_list_img');
+	        //已选择几件
+	        var selectedCountSpan = document.querySelector('.dingdan_sele_span');
+	        //右边总价
+	        var smail = document.querySelector('.dingdan_sele_smail');
+			var big = document.querySelector('.dingdan_sele_big');
+	        //input的当前值
+	        var sum = document.querySelector('input_number');
+	        selectAll.addEventListener('click', function() {
+	            toggleSelectAll();
+	        });
+	
+	        cartImages.forEach(function(img) {
+	            img.addEventListener('click', function() {
+	                toggleImage(img);
+	            });
+	        });
+	
+	        function toggleImage(img) {
+	            if (img.classList.contains('selected')) {
+	                img.src = '../img/复选no.png';
+	                img.classList.remove('selected');
+	            } else {
+	                img.src = '../img/复选yes.png';
+	                img.classList.add('selected');
+	            }
+	            updateSelectedCount();
+	            updateSelectedPrice();
+	            checkSelectAll();
+	        }
+	
+	        function toggleSelectAll() {
+	            if (selectAll.classList.contains('selected')) {
+	                selectAll.src = '../img/复选no.png';
+	                selectAll.classList.remove('selected');
+	                // 取消选中所有商品图片
+	                cartImages.forEach(function(img) {
+	                    img.src = '../img/复选no.png';
+	                    img.classList.remove('selected');
+	                });
+	            } else {
+	                selectAll.src = '../img/复选yes.png';
+	                selectAll.classList.add('selected');
+	                // 选中所有商品图片
+	                cartImages.forEach(function(img) {
+	                    img.src = '../img/复选yes.png';
+	                    img.classList.add('selected');
+	                });
+	            }
+	            updateSelectedCount();
+	            updateSelectedPrice();
+	        }
 			
-			    parentLi.addEventListener('mouseover', function() {
-			        hoverBox.style.display = 'block';
-			    });
-			
-			    parentLi.addEventListener('mouseout', function() {
-			        hoverBox.style.display = 'none';
+	        //改变数量
+	        function updateSelectedCount() {
+	            var selectedCount = document.querySelectorAll('.cart_body .cart_list_img.selected').length;
+	            selectedCountSpan.textContent = selectedCount;
+
+	        }
+	        //选中后计算价格
+	        function updateSelectedPrice() {
+	            var totalPrice = 0;
+
+	            // 计算选中商品的总价格
+	            document.querySelectorAll('.cart_body .cart_list_img.selected').forEach(function(img) {
+	    			//价格
+	                var parentDiv = img.closest('.cart_body');
+	                var priceText = parentDiv.querySelector('.cart_list_details_price').textContent.trim(); 
+	                var price = parseFloat(priceText.replace('￥', ''));
+	                totalPrice += price;
+	            });
+
+	            smail.textContent = '￥' + totalPrice.toFixed(2);
+	            big.textContent = '￥' + totalPrice.toFixed(2);
+	        }
+
+
+	        function checkSelectAll() {
+	            var allSelected = document.querySelectorAll('.cart_body .cart_list_img').length === document.querySelectorAll('.cart_body .cart_list_img.selected').length;
+	            if (allSelected) {
+	                selectAll.src = '../img/复选yes.png';
+	                selectAll.classList.add('selected');
+	            } else {
+	                selectAll.src = '../img/复选no.png';
+	                selectAll.classList.remove('selected');
+	            }
+	        }
+	    });
+	</script>
+
+
+
+	<script>
+		function decreaseQuantity() {
+		    let input = document.querySelector('.input_number');
+		    let currentValue = parseInt(input.value);
+		    if (currentValue > 1) {
+		        input.value = currentValue - 1;
+		    }
+		}
+		
+		function increaseQuantity() {
+		    let input = document.querySelector('.input_number');
+		    let currentValue = parseInt(input.value);
+		    let maxStock = 3; // 库存数量，根据实际情况修改
+		    if (currentValue < maxStock) {
+		        input.value = currentValue + 1;
+		    }
+		}
+		
+		
+		function updateQuantity(e) {
+		    // 获取用户更改的数量
+		    let sum = parseInt(e.value);
+
+		    // 获取对应的商品价格元素和数量元素
+		    let pricetext = $(e).parent().parent().parent().find('.cart_list_details_price');
+		    let inprice = parseFloat($(e).attr('inprice'));
+		    var totalPrice = 0;
+		    totalPrice = inprice * sum;
+		    pricetext.text("￥" + totalPrice.toFixed(2));	
+		    
+		    // 更新显示的数量和总价格
+		    let shuliangText = $(e).parent().parent().parent().find('#shuliang');
+		    shuliangText.text("数量："+sum);
+		    var smail = document.querySelector('.dingdan_sele_smail');
+		    var big = document.querySelector('.dingdan_sele_big');
+		    var imgs = document.querySelectorAll('.cart_list_img');
+		    smail.innerHTML = "￥0.00";
+		    big.innerHTML = "￥0.00";
+		    imgs.forEach(function(img) {
+		        img.src = '../img/复选no.png';
+		        img.classList.remove('selected');
+		    });
+
+		}
+		
+		
+
+	</script>
+	
+	<script>
+		const huidaodingduan = document.querySelector('.huidaodingduan');
+		huidaodingduan.addEventListener('click', function() {
+			    // 平滑滚动到页面顶部
+			    window.scrollTo({
+			        top: 0,
+			        behavior: 'smooth'
 			    });
 			});
-			sousuo.forEach(sousuo =>{
-				const ss = document.querySelector('.sous');
-				let num = 1;
-				ss.addEventListener('click',function(){
-					num+=1;
-					if(num%2==0){
-						sousuo.style.display = 'block';
-					}else{
-						sousuo.style.display = 'none';
+			if (huidaodingduan) {
+				window.addEventListener('scroll', function() {
+					scrollCount++;
+					if (scrollCount >= 2) {
+						huidaodingduan.style.display = 'block';
 					}
-				})
-			});
-			hoverDives.forEach(hoverDiv=>{
-				const pdiv = hoverDiv.parentElement;
-				pdiv.addEventListener('mouseover', function() {
-				    hoverDiv.style.display = 'block';
-				});
-						
-				pdiv.addEventListener('mouseout', function() {
-				    hoverDiv.style.display = 'none';
-				});
-			});
-		</script>
-		<script>
-			const huidaodingduan = document.querySelector('.huidaodingduan');
-			huidaodingduan.addEventListener('click', function() {
-				    // 平滑滚动到页面顶部
-				    window.scrollTo({
-				        top: 0,
-				        behavior: 'smooth'
-				    });
-				});
-				if (huidaodingduan) {
-					window.addEventListener('scroll', function() {
-						scrollCount++;
-						if (scrollCount >= 2) {
-							huidaodingduan.style.display = 'block';
-						}
-						
-						// 检查用户是否滚动到页面顶部
-						if (window.scrollY === 0) {
-							huidaodingduan.style.display = 'none';
-						}
-					});
 					
-					// 监听鼠标滚轮事件
-					window.addEventListener('wheel', function() {
-						// 如果用户滚回到页面顶部，隐藏按钮
-						if (window.scrollY === 0) {
-							huidaodingduan.style.display = 'none';
-						}
-					});
+					// 检查用户是否滚动到页面顶部
+					if (window.scrollY === 0) {
+						huidaodingduan.style.display = 'none';
+					}
+				});
+				
+				// 监听鼠标滚轮事件
+				window.addEventListener('wheel', function() {
+					// 如果用户滚回到页面顶部，隐藏按钮
+					if (window.scrollY === 0) {
+						huidaodingduan.style.display = 'none';
+					}
+				});
+			}
+	</script>
+	
+	<script src="//unpkg.com/layui@2.9.7/dist/layui.js"></script>
+	<script>
+		let scrollCount = 0;
+		const hoverBoxes = document.querySelectorAll('.hover_box');
+		const sousuo = document.querySelectorAll('.sousuo');
+		const hoverDives =document.querySelectorAll('.head_hover')
+		hoverBoxes.forEach(hoverBox => {
+		    const parentLi = hoverBox.parentElement;
+		
+		    parentLi.addEventListener('mouseover', function() {
+		        hoverBox.style.display = 'block';
+		    });
+		
+		    parentLi.addEventListener('mouseout', function() {
+		        hoverBox.style.display = 'none';
+		    });
+		});
+		sousuo.forEach(sousuo =>{
+			const ss = document.querySelector('.sous');
+			let num = 1;
+			ss.addEventListener('click',function(){
+				num+=1;
+				if(num%2==0){
+					sousuo.style.display = 'block';
+				}else{
+					sousuo.style.display = 'none';
 				}
-		</script>
+			})
+		});
+		hoverDives.forEach(hoverDiv=>{
+			const pdiv = hoverDiv.parentElement;
+			pdiv.addEventListener('mouseover', function() {
+			    hoverDiv.style.display = 'block';
+			});
+					
+			pdiv.addEventListener('mouseout', function() {
+			    hoverDiv.style.display = 'none';
+			});
+		});
+	</script>
+	<script>
+		const huidaodingduan = document.querySelector('.huidaodingduan');
+		huidaodingduan.addEventListener('click', function() {
+			    // 平滑滚动到页面顶部
+			    window.scrollTo({
+			        top: 0,
+			        behavior: 'smooth'
+			    });
+			});
+			if (huidaodingduan) {
+				window.addEventListener('scroll', function() {
+					scrollCount++;
+					if (scrollCount >= 2) {
+						huidaodingduan.style.display = 'block';
+					}
+					
+					// 检查用户是否滚动到页面顶部
+					if (window.scrollY === 0) {
+						huidaodingduan.style.display = 'none';
+					}
+				});
+				
+				// 监听鼠标滚轮事件
+				window.addEventListener('wheel', function() {
+					// 如果用户滚回到页面顶部，隐藏按钮
+					if (window.scrollY === 0) {
+						huidaodingduan.style.display = 'none';
+					}
+				});
+			}
+	</script>
 
 	</body>
 </html>
