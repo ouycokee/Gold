@@ -1,81 +1,96 @@
 package entity;
 
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.util.Date;
 
 public class Cart {  
-	  
-	 
     private int cid;  
-  
+    private int id;  
+	private int ccount;  
+	private BigDecimal cprice;  
+	private int proid;  
+	private String image;
+	private String cname;
+	private Date ctime;
 
-    private int userid;  
-  
-     private int speId;  
-  
-       private int cartCount;  
-     private Date cartTime;  
-  
-      public Cart() {  
+    public Cart() {  
  
-    }  
-  
-    public Cart(Integer userid, Integer speId, Integer cartCount, Date cartTime) {  
-        this.userid = userid;  
-        this.speId = speId;  
-        this.cartCount = cartCount;  
-        this.cartTime = cartTime;  
-    }  
-  
+    }
 
-    public Integer getCid() {  
-        return cid;  
-    }  
-  
-    public void setCid(Integer cid) {  
-        this.cid = cid;  
-    }  
-  
-    public Integer getUserid() {  
-        return userid;  
-    }  
-  
-    public void setUserid(Integer userid) {  
-        this.userid = userid;  
-    }  
-  
-    public Integer getSpeId() {  
-        return speId;  
-    }  
-  
-    public void setSpeId(Integer speId) {  
-        this.speId = speId;  
-    }  
-  
-    public Integer getCartCount() {  
-        return cartCount;  
-    }  
-  
-    public void setCartCount(Integer cartCount) {  
-        this.cartCount = cartCount;  
-    }  
-  
-    public Date getCartTime() {  
-        return cartTime;  
-    }  
-  
-    public void setCartTime(Date cartTime) {  
-        this.cartTime = cartTime;  
-    }  
-  
+	public int getCid() {
+		return cid;
+	}
 
-    @Override  
-    public String toString() {  
-        return "CartEntity{" +  
-                "cid=" + cid +  
-                ", userid=" + userid +  
-                ", speId=" + speId +  
-                ", cartCount=" + cartCount +  
-                ", cartTime=" + cartTime +  
-                '}';  
-    }  
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getCcount() {
+		return ccount;
+	}
+
+	public void setCcount(int ccount) {
+		this.ccount = ccount;
+	}
+
+	public BigDecimal getCprice() {
+		return cprice;
+	}
+
+	public void setCprice(BigDecimal cprice) {
+		this.cprice = cprice;
+	}
+
+	public int getProid() {
+		return proid;
+	}
+
+	public void setProid(int proid) {
+		this.proid = proid;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public Date getCtime() {
+		return ctime;
+	}
+
+	public void setCtime(Date ctime) {
+		this.ctime = ctime;
+	}
+
+	public Cart(int cid, int id, int ccount, BigDecimal cprice, int proid, String image, String cname, Date ctime) {
+		super();
+		this.cid = cid;
+		this.id = id;
+		this.ccount = ccount;
+		this.cprice = cprice;
+		this.proid = proid;
+		this.image = image;
+		this.cname = cname;
+		this.ctime = ctime;
+	}  
+    
 }
