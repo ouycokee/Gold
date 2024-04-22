@@ -11,8 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.houtaiDAO;
-@WebServlet(urlPatterns = "/jsp/GuanliyuanServlet")
-public class GuanliyuanServlet extends HttpServlet {
+
+/**
+ * Servlet implementation class orderServlet
+ */
+@WebServlet("/jsp/orderServlet")
+public class orderServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	houtaiDAO hdao = new houtaiDAO();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -23,13 +28,15 @@ public class GuanliyuanServlet extends HttpServlet {
 			pagesizeString="4";
 		}
 		int curpage = Integer.parseInt(curpageString);
+		System.out.println(curpage);
 		int pagesize = Integer.parseInt(pagesizeString);
-		Map<String, Object> m = hdao.InforqueryByPage(curpage, pagesize, "select * from Information limit ?,?", "select count(*) from Information");
+		System.out.println(pagesize);
+		Map<String, Object> m = hdao.orderByPage(curpage, pagesize, "SELECT * FROM dd_Order o INNER JOIN information i ON o.`dd_UserID`=i.`id` ORDER BY dd_OrderID DESC limit ?,?", "select count(*) from dd_order");
 		List l = (List) m.get("list");
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("pagesize", pagesize);
-		request.setAttribute("information", l);
+		request.setAttribute("order", l);
 		request.setAttribute("total", m.get("total"));
-		request.getRequestDispatcher("/jsp/Guanliyuan.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/Yonghuxiangqing.jsp").forward(request, response);
 	}
 }

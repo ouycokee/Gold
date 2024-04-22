@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.houtaiDAO;
-@WebServlet(urlPatterns = "/jsp/GuanliyuanServlet")
-public class GuanliyuanServlet extends HttpServlet {
+@WebServlet("/jsp/GuanliyuanxqServlet")
+public class GuanliyuanxqServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	houtaiDAO hdao = new houtaiDAO();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -24,12 +25,13 @@ public class GuanliyuanServlet extends HttpServlet {
 		}
 		int curpage = Integer.parseInt(curpageString);
 		int pagesize = Integer.parseInt(pagesizeString);
-		Map<String, Object> m = hdao.InforqueryByPage(curpage, pagesize, "select * from Information limit ?,?", "select count(*) from Information");
+		Map<String, Object> m = hdao.adminByPage(curpage, pagesize, "select * from admin limit ?,?","select count(*) from admin");
 		List l = (List) m.get("list");
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("pagesize", pagesize);
-		request.setAttribute("information", l);
+		request.setAttribute("admin", l);
 		request.setAttribute("total", m.get("total"));
-		request.getRequestDispatcher("/jsp/Guanliyuan.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/Guanlixuanxiangqing.jsp").forward(request, response);
 	}
+
 }

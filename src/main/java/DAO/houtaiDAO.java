@@ -7,12 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.text.html.HTMLEditorKit.InsertHTMLTextAction;
+
 import com.alibaba.fastjson2.internal.asm.MethodWriter;
 
 import baseDAO.Mapper;
 import baseDAO.baseDAO;
 import entity.Information;
 import entity.Order;
+import entity.ProductMessage;
+import entity.Refund;
+import entity.Review;
 import entity.admin;
 
 public class houtaiDAO extends baseDAO {
@@ -69,107 +74,82 @@ public class houtaiDAO extends baseDAO {
 			}
 		});
 	}
-	public String InfoQueryToHTML(String sql) {
-		List<Information> datalist = this.InformationQuery(sql);
-		return generateTableHtml(datalist);
+	public List<ProductMessage> productQuery(String sql){
+		return this.executeQuery(sql,new Mapper<ProductMessage>() {
+			@Override
+			public List<ProductMessage> map(ResultSet rs) throws SQLException {
+				List<ProductMessage> list = new ArrayList();
+				while (rs.next()) {
+					ProductMessage pm = new ProductMessage(rs.getInt(1),
+														   rs.getString(2),
+														   rs.getInt(3),
+														   rs.getInt(4),
+														   rs.getInt(5),
+														   rs.getString(6));
+					list.add(pm);
+					System.out.println(pm);
+				}
+				return list;
+			}
+		});
 	}
-	public String OrQueryToHTML(String sql) {
-		List<Order> dataList =this.orderQuery(sql);
-		return generateTableHtmlForOrder(dataList);
+	public List<Review> reviewQuery(String sql){
+		return this.executeQuery(sql,new Mapper<Review>() {
+			@Override
+			public List<Review> map(ResultSet rs) throws SQLException {
+				List<Review> list = new ArrayList();
+				while (rs.next()) {
+					System.out.println(rs.getString(5));
+					Review r = new Review(rs.getInt(1),
+										  rs.getInt(2),
+										  rs.getInt(3),
+										  rs.getInt(4),
+										  rs.getString(5),
+										  rs.getDate(6),
+										  rs.getInt(7),
+										  rs.getInt(8),
+										  rs.getBigDecimal(9),
+										  rs.getInt(10),
+										  rs.getDate(11),
+										  rs.getString(12),
+										  rs.getString(13),
+										  rs.getDate(14),
+										  rs.getString(15),
+										  rs.getInt(16),
+										  rs.getString(17),
+										  rs.getInt(18),
+										  rs.getInt(19));
+					list.add(r);
+					System.out.println(r);
+				}
+				return list;
+			}
+		});
 	}
-	public String adQueryToHTML(String sql) {
-		List<admin> datalist = this.adminQuery(sql);
-		return generateTableHtmlForAdmin(datalist);
+	public List<Refund> refundQuery(String sql){
+		return this.executeQuery(sql,new Mapper<Refund>() {
+			@Override
+			public List<Refund> map(ResultSet rs) throws SQLException {
+				List<Refund> list = new ArrayList();
+				while (rs.next()) {
+					Refund re = new Refund(rs.getInt(1),
+										   rs.getInt(2),
+										   rs.getString(3),
+										   rs.getBigDecimal(4),
+										   rs.getString(5),
+										   rs.getDate(6),
+										   rs.getInt(7),
+										   rs.getInt(8),
+										   rs.getBigDecimal(9));
+					list.add(re);
+					System.out.println(re);
+				}
+				return list;
+			}
+		});
 	}
-	public String generateTableHtml(List<Information> datalist) {
-		StringBuilder htmlBuilder = new StringBuilder();
-		htmlBuilder.append("<table>");
-		htmlBuilder.append("<tr>");
-		htmlBuilder.append("<th>ID</th>");
-		htmlBuilder.append("<th>用户名</th>");
-		htmlBuilder.append("<th>密码</th>");
-		htmlBuilder.append("<th>邮箱</th>");
-		htmlBuilder.append("<th>性别</th>");
-		htmlBuilder.append("<th>出生日期</th>");
-		htmlBuilder.append("</tr>");
-		for(Information inf:datalist) {
-			htmlBuilder.append("<tr>");
-			htmlBuilder.append("<td>").append(inf.getId()).append("</td>");
-			htmlBuilder.append("<td>").append(inf.getUsername()).append("</td>");
-			htmlBuilder.append("<td>").append(inf.getPassword()).append("</td>");
-			htmlBuilder.append("<td>").append(inf.getEmail()).append("</td>");
-			htmlBuilder.append("<td>").append(inf.getGender()).append("</td>");
-			htmlBuilder.append("<td>").append(inf.getBirthday()).append("</td>");
-			htmlBuilder.append("</tr>");
-		}
-		htmlBuilder.append("</table>");
-		return htmlBuilder.toString();
-	}
-	public String generateTableHtmlForOrder(List<Order> datalist) {
-		StringBuilder htmlBuilder = new StringBuilder();
-		htmlBuilder.append("<table>");
-		htmlBuilder.append("<tr>");
-		htmlBuilder.append("<th>ID</th>");
-		htmlBuilder.append("<th>用户ID</th>");
-		htmlBuilder.append("<th>订单总价</th>");
-		htmlBuilder.append("<th>订单状态</th>");
-		htmlBuilder.append("<th>下单时间</th>");
-		htmlBuilder.append("<th>送货地址</th>");
-		htmlBuilder.append("<th>送货电话</th>");
-		htmlBuilder.append("<th>送货时间</th>");
-		htmlBuilder.append("<th>送货备注</th>");
-		htmlBuilder.append("<th>用户名</th>");
-		htmlBuilder.append("<th>密码</th>");
-		htmlBuilder.append("<th>邮箱</th>");
-		htmlBuilder.append("<th>性别</th>");
-		htmlBuilder.append("<th>出生日期</th>");
-		htmlBuilder.append("</tr>");
-		for(Order or : datalist) {
-			htmlBuilder.append("<tr>");
-			htmlBuilder.append("<td>").append(or.getOrderId()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getUserId()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getTotalPrice()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getStatus()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getCreateTime()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getAddress()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getPhone()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getDeliveryTime()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getNote()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getUsername()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getPassword()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getEmail()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getGender()).append("</td>");
-			htmlBuilder.append("<td>").append(or.getBirthday()).append("</td>");
-			htmlBuilder.append("</tr>");
-		}
-		htmlBuilder.append("</table>");
-		return htmlBuilder.toString();
-	}
-	public String generateTableHtmlForAdmin(List<admin> datalist) {
-		StringBuilder htmlBuilder = new StringBuilder();
-		htmlBuilder.append("<table>");
-		htmlBuilder.append("<tr>");
-		htmlBuilder.append("<th>ID</th>");
-		htmlBuilder.append("<th>管理员名称</th>");
-		htmlBuilder.append("<th>管理员密码</th>");
-		htmlBuilder.append("<th>管理员联系方式</th>");
-		htmlBuilder.append("<th>管理员权限</th>");
-		htmlBuilder.append("<th>创建时间</th>");
-		htmlBuilder.append("</tr>");
-		for(admin ad:datalist) {
-			htmlBuilder.append("<tr>");
-			htmlBuilder.append("<td>").append(ad.getAdminId()).append("</td>");
-			htmlBuilder.append("<td>").append(ad.getAdminName()).append("</td>");
-			htmlBuilder.append("<td>").append(ad.getAdminPassword()).append("</td>");
-			htmlBuilder.append("<td>").append(ad.getAdminContact()).append("</td>");
-			htmlBuilder.append("<td>").append((ad.getAdminRole()==1?"低级管理员":"高级管理员")).append("</td>");
-			htmlBuilder.append("<td>").append(ad.getAdminCreateTime()).append("</td>");
-			htmlBuilder.append("</tr>");
-		}
-		htmlBuilder.append("</table>");
-		return htmlBuilder.toString();
-	}
-	public Map<String, Object> queryByPage(int curpage, int pagesize,String sql,String sql2){
+	
+	public Map<String, Object> InforqueryByPage(int curpage, int pagesize,String sql,String sql2){
 		List<Information> list = this.executeQuery(sql, new Mapper<Information>() {
 			@Override
 			public List<Information> map(ResultSet rs) throws SQLException {
@@ -194,4 +174,99 @@ public class houtaiDAO extends baseDAO {
 		map.put("total", obj);
 		return map;
 	}
+	public Map<String, Object> adminByPage(int curpage,int pagesize,String sql,String sql2){
+		List<admin> list = this.executeQuery(sql, new Mapper<admin>() {
+
+			@Override
+			public List<admin> map(ResultSet rs) throws SQLException {
+				List<admin> list = new ArrayList<>();
+				while(rs.next()) {
+					admin a = new admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getTimestamp(6));
+					list.add(a);
+				}
+				return list;
+			}
+		},(curpage-1)*pagesize,pagesize);
+		Object obj = this.singleObject(sql2);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("total", obj);
+		return map;
+	}
+	public Map<String, Object> productByPage(int curpage,int pagesize,String sql,String sql2){
+		List<ProductMessage> list = this.executeQuery(sql, new Mapper<ProductMessage>() {
+			@Override
+			public List<ProductMessage> map(ResultSet rs) throws SQLException {
+				List<ProductMessage> list = new ArrayList<>();
+				while(rs.next()){
+					ProductMessage pm = new ProductMessage(rs.getInt(1),
+							   rs.getString(2),
+							   rs.getInt(3),
+							   rs.getInt(4),
+							   rs.getInt(5),
+							   rs.getString(6));
+					list.add(pm);
+				}
+				return list;
+			}
+		},(curpage-1)*pagesize,pagesize);
+		Object obj = this.singleObject(sql2);
+		Map<String, Object>map  = new HashMap<>();
+		map.put("list", list);
+		map.put("total", obj);
+		return map;
+	}
+	public Map<String, Object> orderByPage(int curpage,int pagesize,String sql,String sql2){
+		List<Order> list = this.executeQuery(sql, new Mapper<Order>() {
+			@Override
+			public List<Order> map(ResultSet rs) throws SQLException {
+				List<Order> list = new ArrayList();
+				while (rs.next()) {
+					Order o = new Order(rs.getInt(1),
+										rs.getInt(2),
+										rs.getBigDecimal(3),
+										rs.getInt(4),
+										rs.getDate(5),
+										rs.getString(6),
+										rs.getString(7), 
+										rs.getDate(8),
+										rs.getString(9),
+										rs.getInt(10),
+										rs.getString(11),
+										rs.getString(12),
+										rs.getString(13),
+										rs.getString(14),
+										rs.getDate(15));
+					list.add(o);
+				}
+				return list;
+			}
+		},(curpage-1)*pagesize,pagesize);
+		Object obj = this.singleObject(sql2);
+		Map<String, Object>map  = new HashMap<>();
+		map.put("list", list);
+		map.put("total", obj);
+		return map;
+	}
+	public int InformationInsert(String sql,String name,String pwd,String email,String gender,String birthday) {
+//		String sql = "insert into Information(username,ipassword,email,gender,birthday) values(?,?,?,?,?)";
+		return this.execute(sql, name,pwd,email,gender,birthday);
+	}
+	public int InformationUpdate(String sql,String name,String pwd,String email,String gender,String birthday,String id) {
+		return this.execute(sql, name,pwd,email,gender,birthday,id);
+	}
+	public int AdminInser(String sql,String adminName,String adminPassword,String adminContact,int adminRole,String adminCreateTime) {
+		return this.execute(sql, adminName,adminPassword,adminContact,adminRole,adminCreateTime);
+	}
+	public int AdminUpdate(String sql,String adminName,String adminPassword,String adminContact,int adminRole,String adminCreateTime,int adminId) {
+		return this.execute(sql,adminName,adminPassword,adminContact,adminRole,adminCreateTime,adminId);
+	}
+	public int ProductInsert(String sql,int proId,String proName,int categoryId,int proStatus,int Cate_id,String Cate_name) {
+		return this.execute(sql,proName,categoryId,proStatus,Cate_id,Cate_name);
+	}
+	public int ProductUpdate(String sql,String proName,int categoryId,int proStatus,int Cate_id,String Cate_name,int proId) {
+		return this.execute(sql,proName,categoryId,proStatus,Cate_id,Cate_name,proId);
+	}
+
 }

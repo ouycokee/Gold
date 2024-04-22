@@ -5,10 +5,13 @@
 	version="2.0">
 	<tlib-version>2.0</tlib-version>
 	<short-name>tr03802_tags</short-name>
-	<uri>http://www.trkj.com/tags</uri>
+	<uri>http://www.trkj.com/Gold/page</uri>
 	<tag>
+		<!-- 标签名称 -->
 		<name>page</name>
-		<tag-class>com.zktr.tag.PageTag</tag-class>
+		<!-- 标签处理器类名 -->
+		<tag-class>entity.pageEntity</tag-class>
+		<!-- 标签体为空 -->
 		<body-content>empty</body-content>
 		<attribute>
 			<name>controller</name>
@@ -32,8 +35,10 @@
 		</attribute>
 		<attribute>
 			<name>where</name>
-			<required>false</required>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	
+	
 </taglib>
