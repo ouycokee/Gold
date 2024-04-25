@@ -947,7 +947,7 @@
 		<p>Gold珠宝（股份代号：9999）· 香港主板上市公司Copyright © 2016深圳市绍福电子商务有限公司版权所有   粤B2-20110210   粤ICP备11010408号广东省深圳市盐田区深盐路2011号周大福集团大厦15楼</p>
 	</footer>
 	<script>
-		$(document).ready(function() {
+	$(document).ready(function() {
 		  $('.sousuo').on('input', function() {
 			$(this).attr('placeholder', '请输入关键词，按回车键搜索');
 		  });
@@ -956,8 +956,8 @@
 			if (e.which == 13) {
 			  let keyword = $(this).val();
 			  if (keyword.trim() !== '') {
-				// 执行搜索并提交的逻辑
-				alert('您输入的关键词是：' + keyword);
+				  let url = 'select?pname=' + keyword;
+			      location.href = url;
 			  } else {
 				alert('按回车键搜索');
 			  }

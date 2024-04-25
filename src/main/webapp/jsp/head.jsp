@@ -9,6 +9,7 @@
 <title>周大福官方商场</title>
 <link href="//unpkg.com/layui@2.9.7/dist/css/layui.css" rel="stylesheet">
 <script src="../jquery-3.5.1.min.js"></script>
+<script src="../jquery.min.js"></script>
 <script src="//unpkg.com/layui@2.9.7/dist/layui.js"></script>
 <style>
 	body {
@@ -769,17 +770,17 @@
 	<script>
 		$(document).ready(function() {
 		  $('.sousuo').on('input', function() {
-			$(this).attr('placeholder', '请输入关键词，按回车键搜索');
+			$(this).attr('placeholder', '请输入关键词搜索');
 		  });
 		
 		  $('.sousuo').keypress(function(e) {
 			if (e.which == 13) {
 			  let keyword = $(this).val();
 			  if (keyword.trim() !== '') {
-				// 执行搜索并提交的逻辑
-				alert('您输入的关键词是：' + keyword);
+				  let url = 'select?pname=' + keyword;
+			      location.href = url;
 			  } else {
-				alert('请输入关键词后再按回车键进行搜索');
+				alert('请输入内容');
 			  }
 			}
 		  });

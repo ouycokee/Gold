@@ -1,5 +1,6 @@
 package entity;
 
+import java.math.BigDecimal;
 
 public class ProductMessage {
   
@@ -19,9 +20,49 @@ public class ProductMessage {
     
     
     private String detail;
+    private String imageUrl;
+	private BigDecimal price;
+	private int count;
 
-    public String getDetail() {
+    public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getDetail() {
 		return detail;
+	}
+
+	public ProductMessage(int proId, String proName, String imageUrl, BigDecimal price) {
+		super();
+		this.proId = proId;
+		this.proName = proName;
+		this.imageUrl = imageUrl;
+		this.price = price;
+	}
+
+	public ProductMessage(int count) {
+		super();
+		this.count = count;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 	public ProductMessage(String detail) {
