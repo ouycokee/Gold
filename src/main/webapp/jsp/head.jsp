@@ -784,6 +784,10 @@
 
 	        // 根据存储的索引为对应的 li 元素添加 "red_select" 类
 	        liItems[selectedLiIndex].classList.add("red_select");
+	    } else {
+	        // 如果没有存储的状态，则默认给第一个 li 元素添加 "red_select" 类
+	        var selnav = document.querySelector(".top_sele_ul li:first-child");
+	        selnav.classList.add("red_select");
 	    }
 	});
 
@@ -801,6 +805,7 @@
 	        sessionStorage.setItem("selectedLiIndex", index);
 	    });
 	});
+
 
 	
 		$(document).ready(function() {
