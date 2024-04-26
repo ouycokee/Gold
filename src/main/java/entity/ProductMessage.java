@@ -32,6 +32,11 @@ public class ProductMessage {
 		this.count = count;
 	}
 
+	public ProductMessage(int count) {
+		super();
+		this.count = count;
+	}
+
 	public String getDetail() {
 		return detail;
 	}
@@ -42,11 +47,6 @@ public class ProductMessage {
 		this.proName = proName;
 		this.imageUrl = imageUrl;
 		this.price = price;
-	}
-
-	public ProductMessage(int count) {
-		super();
-		this.count = count;
 	}
 
 	public String getImageUrl() {

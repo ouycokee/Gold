@@ -727,7 +727,7 @@
 		    <ul>
 		        <li><a href="home">首页</a></li>
 		        <li>
-		            <a href="#">全部商品</a>
+		            <a href="all">全部商品</a>
 		            <div class="hover_box">
 						<div class="layui-tab layui-tab-brief">
 						  <ul class="layui-tab-title">

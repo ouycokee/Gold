@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
 <script src="../jquery.min.js"></script>
 <!DOCTYPE html>
 <html>
@@ -48,7 +47,6 @@
 		}
 		.main_li img{
 			width: 313px;
-			margin-bottom: 20px;
 		}
 		.main_price{
 			color: #862633;

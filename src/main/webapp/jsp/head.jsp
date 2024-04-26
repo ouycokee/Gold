@@ -198,7 +198,7 @@
 	    display: flex;
 	    justify-content: center; /* 或者justify-content: space-evenly; */
 	}
-	header nav ul li:first-child{
+	.red_select{
 		border-bottom:2px solid red;
 	}
 	nav ul li {
@@ -565,10 +565,10 @@
 			</div>
 		</div>
 		<nav>
-		    <ul>
+		    <ul class="top_sele_ul">
 		        <li><a href="home">首页</a></li>
 		        <li>
-		            <a href="#">全部商品</a>
+		            <a href="/gold/jsp/all">全部商品</a>
 		            <div class="hover_box">
 						<div class="layui-tab layui-tab-brief">
 						  <ul class="layui-tab-title">
@@ -768,6 +768,41 @@
 	</header>
 
 	<script>
+	document.addEventListener("DOMContentLoaded", function() {
+	    // 检查 sessionStorage 中是否有存储的状态
+	    var selectedLiIndex = sessionStorage.getItem("selectedLiIndex");
+
+	    if (selectedLiIndex !== null) {
+	        // 如果有存储的状态，则根据索引设置相应的 li 元素为选中状态
+	        var selnav = document.querySelector(".top_sele_ul");
+	        var liItems = selnav.querySelectorAll("li");
+
+	        // 移除所有 li 元素的 "red_select" 类
+	        liItems.forEach(function(li) {
+	            li.classList.remove("red_select");
+	        });
+
+	        // 根据存储的索引为对应的 li 元素添加 "red_select" 类
+	        liItems[selectedLiIndex].classList.add("red_select");
+	    }
+	});
+
+	var selnav = document.querySelector(".top_sele_ul");
+	var liItems = selnav.querySelectorAll("li");
+
+	liItems.forEach(function(item, index) {
+	    item.addEventListener("click", function() {
+	        liItems.forEach(function(li) {
+	            li.classList.remove("red_select");
+	        });
+	        this.classList.add("red_select");
+
+	        // 将点击的 li 元素的索引存储到 sessionStorage 中
+	        sessionStorage.setItem("selectedLiIndex", index);
+	    });
+	});
+
+	
 		$(document).ready(function() {
 		  $('.sousuo').on('input', function() {
 			$(this).attr('placeholder', '请输入关键词搜索');

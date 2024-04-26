@@ -17,7 +17,7 @@ import entity.ProductMessage;
 
 @WebServlet("/jsp/home")
 public class HomeServlet extends HttpServlet{
-	HomeDAO homedao = new HomeDAO();
+	HomeDAO homedao = new HomeDAO(); 
 	PriceDAO pridao = new PriceDAO();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
