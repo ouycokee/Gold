@@ -33,9 +33,7 @@ public class yonghuServlet extends HttpServlet {
 			pagesizeString="4";
 		}
 		int curpage = Integer.parseInt(curpageString);
-		System.out.println(curpage);
 		int pagesize = Integer.parseInt(pagesizeString);
-		System.out.println(pagesize);
 		Map<String, Object> m = hdao.InforqueryByPage(curpage, pagesize, "select * from Information limit ?,?", "select count(*) from Information");
 		List l = (List) m.get("list");
 		request.setAttribute("curpage", curpage);

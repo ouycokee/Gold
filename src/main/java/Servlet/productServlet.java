@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.houtaiDAO;
+import entity.ProductMessage;
 
 /**
  * Servlet implementation class productServlet
@@ -28,15 +29,16 @@ public class productServlet extends HttpServlet {
 			pagesizeString="4";
 		}
 		int curpage = Integer.parseInt(curpageString);
-		System.out.println(curpage);
 		int pagesize = Integer.parseInt(pagesizeString);
-		System.out.println(pagesize);
+		List<ProductMessage> ll = hdao.productQueryId();
 		Map<String, Object> m = hdao.productByPage(curpage, pagesize, "SELECT * FROM Products_message p INNER JOIN Category c ON p.`Cate_id`=c.`Cate_id` ORDER BY p.`Pro_id` DESC limit ?,?", "select count(*) from products_message");
 		List l = (List) m.get("list");
+		System.out.println(l);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("pagesize", pagesize);
 		request.setAttribute("product", l);
+		request.setAttribute("proid",ll);
 		request.setAttribute("total", m.get("total"));
-		request.getRequestDispatcher("/jsp/Yonghuxiangqing.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/productxiangqing.jsp").forward(request, response);
 	}
 }

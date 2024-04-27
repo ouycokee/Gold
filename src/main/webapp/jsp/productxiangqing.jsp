@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://www.trkj.com/Gold/page" %>
@@ -14,6 +14,28 @@
 	<style>
 		.layui-nav.layui-nav-tree{
 			margin-top:108px;
+		}
+		.cxtable {
+		      border-collapse: collapse;
+			  margin-left: 75px;
+			  width: 90%;
+			  background-color: #f2f2f2;
+			  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+		}
+		
+		.cxtable th, .cxtable td {
+		  padding: 8px;
+		  text-align: left;
+		  border-bottom: 1px solid #ddd;
+		}
+		
+		.cxtable th {
+		  background-color: #f5f5f5;
+		}
+		
+		.cxtable tr:hover {
+		  background-color: #f9f9f9;
+		  transform: scale(1.05);
 		}
 	</style>
 </head>
@@ -90,91 +112,95 @@
 						<a>查询</a>
 					</div>
 				</div>
-				<table id="table1">
-					<tr>
-						<th></th>
-						<th>Id</th>
-						<th>商品名称</th>
-						<th>分类Id</th>
-						<th>邮箱</th>
-						<th>商品状态</th>
-						<th>出生日期</th>
-					</tr>
-					<c:forEach items="${order}" var="i">
-		                <tr>
-		                	<td><input type="checkbox" name="fuxuan"></td>
-		                    <td><c:out value="${i.getOrderId()}"/></td>
-		                    <td><c:out value="${i.getUserId()}"/></td>
-		                    <td><c:out value="${i.getTotalPrice()}"/></td>
-		                    <td><c:out value="${i.getStatus()}"/></td>
-		                    <td><c:out value="${i.getCreateTime()}"/></td>
-		                    <td><c:out value="${i.getAddress()}"/></td>
-		                    <td><c:out value="${i.getPhone()}"/></td>
-		                    <td><c:out value="${i.getDeliveryTime()}"/></td>
-		                    <td><c:out value="${i.getNote()}"/></td>
-		                    <td><c:out value="${i.getUsername()}"/></td>
-		                    <td><c:out value="${i.getPassword()}"/></td>
-		                    <td><c:out value="${i.getEmail()}"/></td>
-		                    <td><c:out value="${i.getGender()}"/></td>
-		                    <td><c:out value="${i.getBirthday()}"/></td>
-		                </tr>
-		            </c:forEach>
-				</table>
-				<f:page controller="orderServlet" pagesize="${pagesize}" total="${total}" curpage="${param.curpage}" where=""></f:page>
+				<form action="deleteServlet" method="get" class="shanc">
+					<input type="hidden" name="selectedIds" id="selected-ids" value="">
+					<table id="table1">
+						<tr>
+							<th></th>
+							<th>Id</th>
+							<th>商品名称</th>
+							<th>商品状态</th>
+							<th>分类Id</th>
+							<th>分类名称</th>
+						</tr>
+						<c:forEach items="${product}" var="i">
+			                <tr>
+			                	<td><input type="checkbox" name="fuxuan"></td>
+			                    <td><c:out value="${i.getProId()}"/></td>
+			                    <td><c:out value="${i.getProName()}"/></td>
+			                    <td><c:out value="${i.getProStatus()==1?'上架':'下架'}"/></td>
+			                    <td><c:out value="${i.getCate_id()}"/></td>
+			                    <td><c:out value="${i.getCate_name()}"/></td>
+			                </tr>
+			            </c:forEach>
+					</table>
+				  </form>
+				<f:page controller="productServlet" pagesize="${pagesize}" total="${total}" curpage="${param.curpage}" where=""></f:page>
 				<div class="tianjia">
-					<h2 class="form-title">添加新用户</h2>
+					<h2 class="form-title">添加新商品</h2>
 					
-					<form class="form-container" id="userDataForm1" action="InformationInsertServlet" method="get">
+					<form class="form-container" action="productInsertServlet" method="get">
 						<input type="hidden" value="1" name="yanzheng"/>
-					    <label for="username" class="form-label">用户名:</label>
-					    <input type="text" id="username1" name="username" class="form-input">
-					
-					    <label for="password" class="form-label">密码:</label>
-					    <input type="password" id="password1" name="password" class="form-input">
-					
-					    <label for="email" class="form-label">邮箱:</label>
-					    <input type="email" id="email1" name="email" class="form-input">
-					
-					    <label for="gender" class="form-label">性别:</label>
-					    <select id="gender1" name="gender" class="form-input">
-					        <option value="male">男</option>
-					        <option value="female">女</option>
+					    <label for="username" class="form-label">商品名:</label>
+					    <input type="text" name="name" class="form-input">
+
+					    <label for="email" class="form-label">商品分类:</label>
+					    <select name="fenlei" class="form-input">
+					        <option value="1">戒指</option>
+					        <option value="2">手环</option>
+					        <option value="3">元宝</option>
 					    </select>
 					
-					    <label for="birthdate" class="form-label">出生日期:</label>
-					    <input type="date" id="birthdate1" name="birthdate" class="form-input">
-					
+					    <label for="gender" class="form-label">商品状态:</label>
+					    <select name="zhuangtai" class="form-input">
+					        <option value="1">上架</option>
+					        <option value="2">不上架</option>
+					    </select>
+
 					    <input type="submit" value="提交" class="form-submit">
 					</form>
 										
 				</div>
 				<div class="genggai">
-					<h2 class="form-title">更改用户信息</h2>
-				    <form class="form-container" id="userDataForm2" action="InformationInsertServlet" method="get">
+					<h2 class="form-title">更改商品信息</h2>
+				    <form class="form-container" action="productInsertServlet" method="get">
 				    	<input type="hidden" value="2" name="yanzheng"/>
-				        <label for="userId" class="form-label">Id:</label>
-				        <input type="text" id="userId2" name="userId" class="form-input">
-				
-				        <label for="username" class="form-label">用户名:</label>
-				        <input type="text" id="username2" name="username" class="form-input">
-				
-				        <label for="password" class="form-label">密码:</label>
-				        <input type="password" id="password2" name="password" class="form-input">
-				
-				        <label for="email" class="form-label">邮箱:</label>
-				        <input type="email" id="email2" name="email" class="form-input">
-				
-				        <label for="gender" class="form-label">性别:</label>
-				        <select id="gender2" name="gender" class="form-input">
-				            <option value="male">男</option>
-				            <option value="female">女</option>
-				        </select>
-				
-				        <label for="birthdate" class="form-label">出生日期:</label>
-				        <input type="date" id="birthdate2" name="birthdate" class="form-input">
-				
-				        <input type="submit" value="更改" class="form-submit">
+				    	<select name="id" class="form-input">
+					        <c:forEach items="${proid}" var="d">
+					        	<option value="${d.proId}">${d.getProId()}</option>
+					        </c:forEach>
+					    </select>
+				    	
+				        <label for="username" class="form-label">商品名:</label>
+					    <input type="text" name="name" class="form-input">
+
+					    <label for="email" class="form-label">商品分类:</label>
+					    <select name="fenlei" class="form-input">
+					        <option value="1">戒指</option>
+					        <option value="2">手环</option>
+					        <option value="3">元宝</option>
+					    </select>
+					
+					    <label for="gender" class="form-label">商品状态:</label>
+					    <select name="zhuangtai" class="form-input">
+					        <option value="1">上架</option>
+					        <option value="2">不上架</option>
+					    </select>
+
+					    <input type="submit" value="提交" class="form-submit">
 				    </form>
+				</div>
+				<div class="chaxun">
+					<h2 class="form-title">添加新用户</h2>
+					<form class="form-container">
+						<input type="hidden" value="1" name="yanzheng"/>
+					    <label for="tiaojiao" class="tiaojian">条件</label>
+					    <input type="text" name="tiaojian" id="tj" class="form-input">
+					    <input type="button" id="cha" value="查询" class="form-submit">
+					</form>
+					<table class="cxtable">
+						
+					</table>
 				</div>
 			</div>
 		</div>
@@ -244,7 +270,49 @@
 				window.location.href = $('.h_sel').attr('href');
 			}
 		});
-        
+        $('.form-submit').click(function(){
+        	var tj=$('#tj').val();
+        	$.ajax({
+        		TYPE:'GET',
+        		url:'chaxunServlet',
+        		data:{
+        			tiaojian:tj,
+        			panduan:"product"
+        			},
+        		success:function(response){
+        			$('.cxtable').html(response);
+        		}
+        	});
+        });
+        $('.shan').click(function(){
+        	$('.shanc').submit();
+        });
+    </script>
+     <script>
+    	var checkboxes = document.querySelectorAll('.fuxuan');
+    	var selectedIdsInput = document.getElementById('selected-ids');
+    	checkboxes.forEach(function(checkbox){
+    		checkbox.addEventListener('click',function(){
+    			var row  = this.parentNode.parentNode;
+    			var idElement = row.querySelector('td:nth-child(2)');
+    			var id = idElement.textContent.trim();
+    			if(this.checked){
+    				addSelectedId(id);
+    			}else{
+    				removeSelectedId(id);
+    			}
+    		})
+    	});
+    	function addSelectedId(id){
+    		var selectedIds = selectedIdsInput.value;
+            selectedIds += id+",";
+            selectedIdsInput.value = selectedIds;
+    	}
+    	function removeSelectedId(id){
+    		var selectedIds = selectedIdsInput.value;
+            selectedIds = selectedIds.replace(id + ",", "");
+            selectedIdsInput.value = selectedIds;
+    	}
     </script>
 </body>
 </html>

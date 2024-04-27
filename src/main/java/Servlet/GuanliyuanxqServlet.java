@@ -27,6 +27,7 @@ public class GuanliyuanxqServlet extends HttpServlet {
 		int pagesize = Integer.parseInt(pagesizeString);
 		Map<String, Object> m = hdao.adminByPage(curpage, pagesize, "select * from admin limit ?,?","select count(*) from admin");
 		List l = (List) m.get("list");
+		System.out.println(l);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("pagesize", pagesize);
 		request.setAttribute("admin", l);

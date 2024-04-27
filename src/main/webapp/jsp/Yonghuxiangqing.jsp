@@ -16,6 +16,28 @@
 		.layui-nav.layui-nav-tree{
 			margin-top:108px;
 		}
+		.cxtable {
+		      border-collapse: collapse;
+			  margin-left: 75px;
+			  width: 90%;
+			  background-color: #f2f2f2;
+			  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+		}
+		
+		.cxtable th, .cxtable td {
+		  padding: 8px;
+		  text-align: left;
+		  border-bottom: 1px solid #ddd;
+		}
+		
+		.cxtable th {
+		  background-color: #f5f5f5;
+		}
+		
+		.cxtable tr:hover {
+		  background-color: #f9f9f9;
+		  transform: scale(1.05);
+		}
 	</style>
 </head>
 <body>
@@ -91,83 +113,90 @@
 						<a>查询</a>
 					</div>
 				</div>
-				<table id="table1">
-					<tr>
-						<th></th>
-						<th>Id</th>
-						<th>用户名</th>
-						<th>密码</th>
-						<th>邮箱</th>
-						<th>性别</th>
-						<th>出生日期</th>
-					</tr>
-					<c:forEach items="${information}" var="i">
-		                <tr>
-		                	<td><input type="checkbox" name="fuxuan"></td>
-		                    <td><c:out value="${i.getId()}"/></td>
-		                    <td><c:out value="${i.getUsername()}"/></td>
-		                    <td><c:out value="${i.getPassword()}"/></td>
-		                    <td><c:out value="${i.getEmail()}"/></td>
-		                    <td><c:out value="${i.getGender()=='male'?'男':'女'}"/></td>
-		                    <td><c:out value="${i.getBirthday()}"/></td>
-		                </tr>
-		            </c:forEach>
-				</table>
+				<form action="deleteServlet" method="get" class="shanc">
+					<input type="hidden" name="selectedIds" id="selected-ids" value="">
+					<table id="table1">
+						<tr>
+							<th></th>
+							<th>Id</th>
+							<th>用户名</th>
+							<th>密码</th>
+							<th>邮箱</th>
+							<th>性别</th>
+							<th>出生日期</th>
+						</tr>
+						<c:forEach items="${information}" var="i">
+			                <tr>
+			                	<td><input type="checkbox" name="fuxuan" class="fuxuan"></td>
+			                    <td>${i.id}</td>
+			                    <td><c:out value="${i.getUsername()}"/></td>
+			                    <td><c:out value="${i.getPassword()}"/></td>
+			                    <td><c:out value="${i.getEmail()}"/></td>
+			                    <td><c:out value="${i.getGender()=='male'?'男':'女'}"/></td>
+			                    <td><c:out value="${i.getBirthday()}"/></td>
+			                </tr>
+			            </c:forEach>
+					</table>
+				</form>
 				<f:page controller="yonghuServlet" pagesize="${pagesize}" total="${total}" curpage="${param.curpage}" where=""></f:page>
 				<div class="tianjia">
 					<h2 class="form-title">添加新用户</h2>
 					
-					<form class="form-container" id="userDataForm" action="InformationInsertServlet" method="get">
+					<form class="form-container" action="InformationInsertServlet" method="get">
 						<input type="hidden" value="1" name="yanzheng"/>
 					    <label for="username" class="form-label">用户名:</label>
-					    <input type="text" id="username" name="username" class="form-input">
+					    <input type="text" name="username" class="form-input">
 					
 					    <label for="password" class="form-label">密码:</label>
-					    <input type="password" id="password" name="password" class="form-input">
+					    <input type="password" name="password" class="form-input">
 					
 					    <label for="email" class="form-label">邮箱:</label>
-					    <input type="email" id="email" name="email" class="form-input">
+					    <input type="email" name="email" class="form-input">
 					
 					    <label for="gender" class="form-label">性别:</label>
-					    <select id="gender" name="gender" class="form-input">
+					    <select name="gender" class="form-input">
 					        <option value="male">男</option>
 					        <option value="female">女</option>
 					    </select>
-					
-					    <label for="birthdate" class="form-label">出生日期:</label>
-					    <input type="date" id="birthdate" name="birthdate" class="form-input">
-					
 					    <input type="submit" value="提交" class="form-submit">
 					</form>
 										
 				</div>
 				<div class=genggai>
 					<h2 class="form-title">更改用户信息</h2>
-				    <form class="form-container" id="userDataForm" action="InformationInsertServlet" method="get">
+				    <form class="form-container"  action="InformationInsertServlet" method="get">
 				    	<input type="hidden" value="2" name="yanzheng"/>
 				        <label for="userId" class="form-label">Id:</label>
-				        <input type="text" id="userId" name="userId" class="form-input">
+				        <input type="text"  name="userId" class="form-input">
 				
 				        <label for="username" class="form-label">用户名:</label>
-				        <input type="text" id="username" name="username" class="form-input">
+				        <input type="text"  name="username" class="form-input">
 				
 				        <label for="password" class="form-label">密码:</label>
-				        <input type="password" id="password" name="password" class="form-input">
+				        <input type="password"  name="password" class="form-input">
 				
 				        <label for="email" class="form-label">邮箱:</label>
-				        <input type="email" id="email" name="email" class="form-input">
+				        <input type="email"  name="email" class="form-input">
 				
 				        <label for="gender" class="form-label">性别:</label>
-				        <select id="gender" name="gender" class="form-input">
+				        <select  name="gender" class="form-input">
 				            <option value="male">男</option>
 				            <option value="female">女</option>
 				        </select>
-				
-				        <label for="birthdate" class="form-label">出生日期:</label>
-				        <input type="date" id="birthdate" name="birthdate" class="form-input">
-				
 				        <input type="submit" value="更改" class="form-submit">
 				    </form>
+				</div>
+				<div class="chaxun">
+					<h2 class="form-title">添加新用户</h2>
+					<form class="form-container">
+						<input type="hidden" value="1" name="yanzheng"/>
+					    <label for="tiaojiao" class="tiaojian">条件</label>
+					    <input type="text" name="tiaojian" id="tj" class="form-input">
+					    <input type="button" id="cha" value="查询" class="form-submit">
+					</form>
+					<table class="cxtable">
+						
+					</table>
 				</div>
 			</div>
 		</div>
@@ -237,7 +266,49 @@
 				window.location.href = $('.h_sel').attr('href');
 			}
 		});
-        
+        $('.form-submit').click(function(){
+        	var tj=$('#tj').val();
+        	$.ajax({
+        		TYPE:'GET',
+        		url:'chaxunServlet',
+        		data:{
+        			tiaojian:tj,
+        			panduan:"yonghu"
+        			},
+        		success:function(response){
+        			$('.cxtable').html(response);
+        		}
+        	});
+        });
+        $('.shan').click(function(){
+        	$('.shanc').submit();
+        });
+    </script>
+    <script>
+    	var checkboxes = document.querySelectorAll('.fuxuan');
+    	var selectedIdsInput = document.getElementById('selected-ids');
+    	checkboxes.forEach(function(checkbox){
+    		checkbox.addEventListener('click',function(){
+    			var row  = this.parentNode.parentNode;
+    			var idElement = row.querySelector('td:nth-child(2)');
+    			var id = idElement.textContent.trim();
+    			if(this.checked){
+    				addSelectedId(id);
+    			}else{
+    				removeSelectedId(id);
+    			}
+    		})
+    	});
+    	function addSelectedId(id){
+    		var selectedIds = selectedIdsInput.value;
+            selectedIds += id+",";
+            selectedIdsInput.value = selectedIds;
+    	}
+    	function removeSelectedId(id){
+    		var selectedIds = selectedIdsInput.value;
+            selectedIds = selectedIds.replace(id + ",", "");
+            selectedIdsInput.value = selectedIds;
+    	}
     </script>
 </body>
 </html>

@@ -11,8 +11,15 @@ public class Information {
 
     public Information() {
     }
+    
+    
+    public Information(int id) {
+		super();
+		this.id = id;
+	}
 
-    public Information(int id, String username, String password, String email, String gender, Date birthday) {
+
+	public Information(int id, String username, String password, String email, String gender, Date birthday) {
         this.id = id;
         this.username = username;
         this.password = password;

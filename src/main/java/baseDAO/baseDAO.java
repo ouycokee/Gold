@@ -155,6 +155,7 @@ public class baseDAO {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			//绑定参数
 			this.bindParameters(stmt, params);
+			System.out.println(stmt);
 			//执行SQL语句
 			int v = stmt.executeUpdate();
 			//释放资源 

@@ -62,6 +62,15 @@ public class ProductMessage {
 		Cate_name = cate_name;
 	}
 	
+	
+
+
+	public ProductMessage(int proId) {
+		super();
+		this.proId = proId;
+	}
+
+
 	public int getProId() {
 		return proId;
 	}

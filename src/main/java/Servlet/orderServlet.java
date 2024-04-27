@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.houtaiDAO;
+import entity.Information;
 
 /**
  * Servlet implementation class orderServlet
@@ -28,15 +29,16 @@ public class orderServlet extends HttpServlet {
 			pagesizeString="4";
 		}
 		int curpage = Integer.parseInt(curpageString);
-		System.out.println(curpage);
 		int pagesize = Integer.parseInt(pagesizeString);
-		System.out.println(pagesize);
+		List<Information> ll = hdao.informationQueryId();
+		System.out.println(ll);
 		Map<String, Object> m = hdao.orderByPage(curpage, pagesize, "SELECT * FROM dd_Order o INNER JOIN information i ON o.`dd_UserID`=i.`id` ORDER BY dd_OrderID DESC limit ?,?", "select count(*) from dd_order");
 		List l = (List) m.get("list");
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("pagesize", pagesize);
 		request.setAttribute("order", l);
+		request.setAttribute("id", ll);
 		request.setAttribute("total", m.get("total"));
-		request.getRequestDispatcher("/jsp/Yonghuxiangqing.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/dingdanxiangqing.jsp").forward(request, response);
 	}
 }
