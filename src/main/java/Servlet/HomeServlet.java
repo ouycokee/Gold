@@ -23,7 +23,7 @@ public class HomeServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html;charset=utf-8");
-		//新品
+		//新品 
 		List<ProductMessage> listprox = homedao.selectProx();
 		//热卖
 		List<ProductMessage> listpror = homedao.selectPror();
