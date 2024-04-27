@@ -12,6 +12,7 @@
 <title>周大福官方商场</title>
 <link href="//unpkg.com/layui@2.9.7/dist/css/layui.css" rel="stylesheet">
 <script src="../jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src = '../jquery.min.js'></script>
 <script src="//unpkg.com/layui@2.9.7/dist/layui.js"></script>
 <style>
 	body {
@@ -200,7 +201,7 @@
 	    display: flex;
 	    justify-content: center; /* 或者justify-content: space-evenly; */
 	}
-	header nav ul li:first-child{
+	.red_select{
 		border-bottom:2px solid red;
 	}
 	nav ul li {
@@ -629,10 +630,10 @@
 			</div>
 		</div>
 		<nav>
-		    <ul>
+		    <ul class="top_sele_ul">
 		        <li><a href="#">首页</a></li>
 		        <li>
-		            <a href="home">全部商品</a>
+		            <a href="/gold/jsp/all">全部商品</a>
 		            <div class="hover_box">
 						<div class="layui-tab layui-tab-brief">
 						  <ul class="layui-tab-title">
@@ -946,7 +947,48 @@
 		<p>Gold珠宝（股份代号：9999）· 香港主板上市公司Copyright © 2016深圳市绍福电子商务有限公司版权所有   粤B2-20110210   粤ICP备11010408号广东省深圳市盐田区深盐路2011号周大福集团大厦15楼</p>
 	</footer>
 	<script>
-		$(document).ready(function() {
+	document.addEventListener("DOMContentLoaded", function() {
+	    // 检查 sessionStorage 中是否有存储的状态
+	    var selectedLiIndex = sessionStorage.getItem("selectedLiIndex");
+
+	    if (selectedLiIndex !== null) {
+	        // 如果有存储的状态，则根据索引设置相应的 li 元素为选中状态
+	        var selnav = document.querySelector(".top_sele_ul");
+	        var liItems = selnav.querySelectorAll("li");
+
+	        // 移除所有 li 元素的 "red_select" 类
+	        liItems.forEach(function(li) {
+	            li.classList.remove("red_select");
+	        });
+
+	        // 根据存储的索引为对应的 li 元素添加 "red_select" 类
+	        liItems[selectedLiIndex].classList.add("red_select");
+	    } else {
+	        // 如果没有存储的状态，则默认给第一个 li 元素添加 "red_select" 类
+	        var selnav = document.querySelector(".top_sele_ul li:first-child");
+	        selnav.classList.add("red_select");
+	    }
+	});
+
+	var selnav = document.querySelector(".top_sele_ul");
+	var liItems = selnav.querySelectorAll("li");
+
+	liItems.forEach(function(item, index) {
+	    item.addEventListener("click", function() {
+	        liItems.forEach(function(li) {
+	            li.classList.remove("red_select");
+	        });
+	        this.classList.add("red_select");
+
+	        // 将点击的 li 元素的索引存储到 sessionStorage 中
+	        sessionStorage.setItem("selectedLiIndex", index);
+	    });
+	});
+
+
+
+	
+	$(document).ready(function() {
 		  $('.sousuo').on('input', function() {
 			$(this).attr('placeholder', '请输入关键词，按回车键搜索');
 		  });
@@ -955,10 +997,10 @@
 			if (e.which == 13) {
 			  let keyword = $(this).val();
 			  if (keyword.trim() !== '') {
-				// 执行搜索并提交的逻辑
-				alert('您输入的关键词是：' + keyword);
+				  let url = 'select?pname=' + keyword;
+			      location.href = url;
 			  } else {
-				alert('请输入关键词后再按回车键进行搜索');
+				alert('按回车键搜索');
 			  }
 			}
 		  });

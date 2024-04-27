@@ -21,7 +21,9 @@ public class ShopCartzjServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		Integer uid = 1;
 		List<Cart> listcart = dao.seleCartAll(uid);
+		int zcount = dao.selecount(uid);
 		session.setAttribute("listcart", listcart);
+		session.setAttribute("zcount", zcount);
 		req.getRequestDispatcher("shopcart.jsp").forward(req, resp);
 	}
 }
