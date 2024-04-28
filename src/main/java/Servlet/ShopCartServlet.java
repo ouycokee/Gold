@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.ShopCartDAO;
 import entity.Cart;
@@ -28,7 +29,12 @@ public class ShopCartServlet extends HttpServlet{
 		String id = req.getParameter("proid");
 		int proid = Integer.parseInt(id);
 		//用户id
-		int uid = 1;
+		HttpSession session = req.getSession();
+		Integer uid = (Integer) session.getAttribute("uid");
+		if(uid == null) {
+        	req.setAttribute("shibai", "请先登录");
+        	req.getRequestDispatcher("login.jsp").forward(req, resp);
+		}
 		//图片
 		String image = req.getParameter("image");
 		//价格
@@ -52,10 +58,11 @@ public class ShopCartServlet extends HttpServlet{
 		String sum = req.getParameter("sum");
 		req.setAttribute("sum", sum);
 		//购物车数量
-		int cartsum = shopdao.selecount(1);
+		int cartsum = shopdao.selecount(uid);
 		req.setAttribute("cartsum", cartsum);
+		
 		//购物车数据
-		List<Cart> listcart = shopdao.seleCartAll(1);
+		List<Cart> listcart = shopdao.seleCartAll(uid);
 		for (Cart cartItem : listcart) {
 		    String originalCname = cartItem.getCname();
 		    int commaIndex = originalCname.indexOf(",");

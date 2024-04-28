@@ -73,7 +73,7 @@
 				</ul>
 			</div>
 			<div class="h_info">
-				<div class="h_user">当前用户：<a class="yonghuming">null</a> , 身份：系统管理员</div>
+				<div class="h_user">当前用户：<a class="yonghuming">${name}</a> , 身份：系统管理员</div>
 				<div class="geren">
 					<form>
 						 <button>个人信息</button>
@@ -120,6 +120,7 @@
 							<th></th>
 							<th>Id</th>
 							<th>用户名</th>
+							<th>电话</th>
 							<th>密码</th>
 							<th>邮箱</th>
 							<th>性别</th>
@@ -130,6 +131,7 @@
 			                	<td><input type="checkbox" name="fuxuan" class="fuxuan"></td>
 			                    <td>${i.id}</td>
 			                    <td><c:out value="${i.getUsername()}"/></td>
+			                    <td><c:out value="${i.getPhone()}"></c:out></td>
 			                    <td><c:out value="${i.getPassword()}"/></td>
 			                    <td><c:out value="${i.getEmail()}"/></td>
 			                    <td><c:out value="${i.getGender()=='male'?'男':'女'}"/></td>
@@ -146,7 +148,10 @@
 						<input type="hidden" value="1" name="yanzheng"/>
 					    <label for="username" class="form-label">用户名:</label>
 					    <input type="text" name="username" class="form-input">
-					
+						
+						<label for="password" class="form-label">电话:</label>
+					    <input type="text" name="dianhua" class="form-input">
+						
 					    <label for="password" class="form-label">密码:</label>
 					    <input type="password" name="password" class="form-input">
 					
@@ -171,7 +176,10 @@
 				
 				        <label for="username" class="form-label">用户名:</label>
 				        <input type="text"  name="username" class="form-input">
-				
+						
+						<label for="password" class="form-label">电话:</label>
+					    <input type="text" name="dianhua" class="form-input">
+						
 				        <label for="password" class="form-label">密码:</label>
 				        <input type="password"  name="password" class="form-input">
 				

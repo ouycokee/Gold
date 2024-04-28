@@ -3,6 +3,7 @@
  <%@ page isELIgnored="false" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://www.trkj.com/Gold/page" %>
+<link rel="icon" href="../img/clown1.png" type="image/png">
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="//cdn.staticfile.org/layui/2.9.7/css/layui.css" rel="stylesheet">
-<title>Insert title here</title>
+<title>管理员</title>
 <script src="//cdn.staticfile.org/layui/2.9.7/layui.js"></script>
 <style>
 	.layui-nav.layui-nav-tree{
@@ -784,7 +785,7 @@
 				</ul>
 			</div>
 			<div class="h_info">
-				<div class="h_user">当前用户：<a class="yonghuming">null</a> , 身份：系统管理员</div>
+				<div class="h_user">当前用户：<a class="yonghuming">${name}</a> , 身份：系统管理员</div>
 				<div class="geren">
 					<form>
 						 <button>个人信息</button>
@@ -793,7 +794,7 @@
 					</form>
 				</div>
 				<div class="h_out">
-					<a href="#">
+					<a href="home">
 						<span>退出</span>
 						<i></i>
 					</a>

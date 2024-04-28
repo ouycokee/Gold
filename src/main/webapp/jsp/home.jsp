@@ -609,7 +609,7 @@
 				<div class="body_center"></div>
 				<div class="body_right">
 					<div><i></i><a>今日金价</a></div>
-					<div class="denglu"><i></i><a>name</a>
+					<div class="denglu"><i></i><a href="user.jsp">个人中心</a>
 					<div><i></i><a href="shopcartzj">购物袋</a></div>
 				</div>
 			</div>
@@ -625,7 +625,6 @@
 				</div>
 				<div class="head_login_but">
 					<button class="head_login_but_dl">登录</button>
-					<button class="head_login_but_zc">注册</button>
 				</div>
 			</div>
 		</div>
@@ -947,6 +946,15 @@
 		<p>Gold珠宝（股份代号：9999）· 香港主板上市公司Copyright © 2016深圳市绍福电子商务有限公司版权所有   粤B2-20110210   粤ICP备11010408号广东省深圳市盐田区深盐路2011号周大福集团大厦15楼</p>
 	</footer>
 	<script>
+	
+	var login = document.querySelector(".head_login_but_dl");
+
+	// 添加点击事件监听器
+	login.addEventListener("click", function() {
+	    // 在这里执行页面跳转，比如跳转到指定的 URL
+	    window.location.href = "login.jsp"; // 请将链接替换为你想要跳转的页面的 URL
+	});
+	
 	document.addEventListener("DOMContentLoaded", function() {
 	    // 检查 sessionStorage 中是否有存储的状态
 	    var selectedLiIndex = sessionStorage.getItem("selectedLiIndex");

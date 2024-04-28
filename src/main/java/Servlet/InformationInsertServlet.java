@@ -24,15 +24,16 @@ public class InformationInsertServlet extends HttpServlet {
 		String yanzheng = request.getParameter("yanzheng");
 		System.out.println(yanzheng);
 		String name = request.getParameter("username");
+		String dianhua = request.getParameter("dianhua");
 		String pwd = request.getParameter("password");
 		String email = request.getParameter("email");
 		String gender = request.getParameter("gender");
 		if(yanzheng.equals("1")) {
 			System.out.println(2);
-			hdao.InformationInsert("insert into Information(username,ipassword,email,gender,birthday) values(?,?,?,?,Now())", name, pwd, email, gender);
+			hdao.InformationInsert("insert into Information(username,phone,ipassword,email,gender,birthday) values(?,?,?,?,?,Now())", name, dianhua,pwd, email, gender);
 		}else if(yanzheng.equals("2")) {
 			String id = request.getParameter("userId");
-			hdao.InformationUpdate("update Information set username=?,ipassword=?,email=?,gender=? where id=? ", name, pwd, email, gender,id);
+			hdao.InformationUpdate("update Information set username=?,phone=?,ipassword=?,email=?,gender=? where id=? ", name,dianhua, pwd, email, gender,id);
 		}
 		
 		request.getRequestDispatcher("/jsp/yonghuServlet").forward(request, response);

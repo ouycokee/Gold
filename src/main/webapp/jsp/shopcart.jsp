@@ -703,7 +703,7 @@
 				<div class="body_center"></div>
 				<div class="body_right">
 					<div><i></i><a>今日金价</a></div>
-					<div class="denglu"><i></i><a>name</a>
+					<div class="denglu"><i></i><a href="user.jsp">个人中心</a>
 					<div><i></i><a href="shopcartzj">购物袋</a></div>
 				</div>
 			</div>
@@ -719,7 +719,6 @@
 				</div>
 				<div class="head_login_but">
 					<button class="head_login_but_dl">登录</button>
-					<button class="head_login_but_zc">注册</button>
 				</div>
 			</div>
 		</div>
@@ -929,7 +928,7 @@
 <div id="cart_hz">
     <div id="cart_hz_center">
         <div id="cart_hz_left">
-            <p>我的购物袋(${zcount})</p>
+            <p>我的购物袋(${cartsum})</p>
             <div class="cart_list">
                 <div class="cart_list_head">
                     <div class="cart_list_head_left">
@@ -1113,7 +1112,14 @@
 
 
 	<!-- 全选 -->
-	<script>
+	<script>	
+	var login = document.querySelector(".head_login_but_dl");
+
+	// 添加点击事件监听器
+	login.addEventListener("click", function() {
+	    // 在这里执行页面跳转，比如跳转到指定的 URL
+	    window.location.href = "login.jsp"; // 请将链接替换为你想要跳转的页面的 URL
+	});
 	    document.addEventListener('DOMContentLoaded', function() {
 	        //全选
 	        var selectAll = document.querySelector('.cart_list_head_left .cart_list_img');

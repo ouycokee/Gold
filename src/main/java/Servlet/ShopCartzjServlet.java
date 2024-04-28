@@ -19,11 +19,17 @@ public class ShopCartzjServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		Integer uid = 1;
+		Integer uid = (Integer) session.getAttribute("uid");
 		List<Cart> listcart = dao.seleCartAll(uid);
+		
 		int zcount = dao.selecount(uid);
+		if(uid == null) {
+        	req.setAttribute("shibai", "请先登录");
+        	req.getRequestDispatcher("login.jsp").forward(req, resp);
+		}
 		session.setAttribute("listcart", listcart);
-		session.setAttribute("zcount", zcount);
+		int cartsum = dao.selecount(uid);
+		req.setAttribute("cartsum", cartsum);
 		req.getRequestDispatcher("shopcart.jsp").forward(req, resp);
 	}
 }

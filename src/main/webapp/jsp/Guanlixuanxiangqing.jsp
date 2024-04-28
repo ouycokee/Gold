@@ -74,7 +74,7 @@
 				</ul>
 			</div>
 			<div class="h_info">
-				<div class="h_user">当前用户：<a class="yonghuming">null</a> , 身份：系统管理员</div>
+				<div class="h_user">当前用户：<a class="yonghuming">${name}</a> , 身份：系统管理员</div>
 				<div class="geren">
 					<form>
 						 <button>个人信息</button>

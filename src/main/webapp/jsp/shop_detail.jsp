@@ -247,12 +247,10 @@
 	        }
 
 			// 如果spenames不为空，则拼接到cname中
-	        //用户id
-	        var id = 1;
 	        //价格
 	        var priceText = $('.shop_right_price').text();
 	        var cprice = priceText.substring(priceText.indexOf('￥') + 1);
-	        var url = 'shopcart?proid=' + proid + "&image=" + image +"&cname=" + cname + "&id=" + id +"&cprice=" + cprice + "&spenames=" + spenames;
+	        var url = 'shopcart?proid=' + proid + "&image=" + image +"&cname=" + cname + "&cprice=" + cprice + "&spenames=" + spenames;
 	        
 	        // 执行跳转
 	        location.href = url;

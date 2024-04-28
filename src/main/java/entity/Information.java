@@ -4,7 +4,30 @@ import java.util.Date;
 public class Information {
     private int id;
     private String username;
-    private String password;
+    private String phone;
+    public Information(int id, String username, String phone, String password, String email, String gender,
+			Date birthday) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.phone = phone;
+		this.password = password;
+		this.email = email;
+		this.gender = gender;
+		this.birthday = birthday;
+	}
+
+
+	public String getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	private String password;
     private String email;
     private String gender;
     private Date birthday;

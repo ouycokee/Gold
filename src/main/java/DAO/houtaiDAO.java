@@ -51,6 +51,19 @@ public class houtaiDAO extends baseDAO {
 			}
 		});
 	}
+	public List<admin> selectAdmin(String name,String pwd){
+		String sql="select * from admin where admin_name=?and admin_password=?";
+		return this.executeQuery(sql, new Mapper<admin>() {
+			public List<admin> map(ResultSet rs) throws SQLException {
+				List<admin> list = new ArrayList();
+				while (rs.next()) {
+					admin a = new admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getTimestamp(6));
+					list.add(a);
+				}
+				return list;
+			}
+		}, name,pwd);
+	}
 	public List<ProductMessage> productQueryId(){
 		String sql = "select Pro_id from products_message order by Pro_id DESC";
 		return this.executeQuery(sql,new Mapper<ProductMessage>() {
@@ -328,7 +341,8 @@ public class houtaiDAO extends baseDAO {
 							rs.getString(3),
 							rs.getString(4),
 							rs.getString(5),
-							rs.getDate(6));
+							rs.getString(6),
+							rs.getDate(7));
 					list.add(inf);
 				}
 				return list;
@@ -416,13 +430,12 @@ public class houtaiDAO extends baseDAO {
 		map.put("total", obj);
 		return map;
 	}
-	public int InformationInsert(String sql,String name,String pwd,String email,String gender) {
+	public int InformationInsert(String sql,String name,String phone,String pwd,String email,String gender) {
 //		String sql = "insert into Information(username,ipassword,email,gender,birthday) values(?,?,?,?,?)";
-		System.out.println(1);
-		return this.execute(sql, name,pwd,email,gender);
+		return this.execute(sql, name,phone,pwd,email,gender);
 	}
-	public int InformationUpdate(String sql,String name,String pwd,String email,String gender,String id) {
-		return this.execute(sql, name,pwd,email,gender,id);
+	public int InformationUpdate(String sql,String name,String phone,String pwd,String email,String gender,String id) {
+		return this.execute(sql, name,phone,pwd,email,gender,id);
 	}
 	public int AdminInser(String sql,String adminName,String adminPassword,String adminContact,int adminRole) {
 		return this.execute(sql, adminName,adminPassword,adminContact,adminRole);
