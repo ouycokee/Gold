@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.houtaiDAO;
 
 /**
- * Servlet implementation class InformationInsertServlet
+ * Servlet implementation class adminInsertServlet
  */
-@WebServlet("/jsp/InformationInsertServlet")
-public class InformationInsertServlet extends HttpServlet {
+@WebServlet("/jsp/adminInsertServlet")
+public class adminInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	houtaiDAO hdao = new houtaiDAO();
 	/**
@@ -22,20 +22,21 @@ public class InformationInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String yanzheng = request.getParameter("yanzheng");
-		System.out.println(yanzheng);
 		String name = request.getParameter("username");
 		String pwd = request.getParameter("password");
 		String email = request.getParameter("email");
 		String gender = request.getParameter("gender");
+		int role = Integer.parseInt(gender);
 		if(yanzheng.equals("1")) {
 			System.out.println(2);
-			hdao.InformationInsert("insert into Information(username,ipassword,email,gender,birthday) values(?,?,?,?,Now())", name, pwd, email, gender);
+			hdao.AdminInser("insert into admin(admin_name,admin_password,admin_contact,admin_Role,admin_createTime)values(?,?,?,?,Now())",name,pwd,email,role);
 		}else if(yanzheng.equals("2")) {
 			String id = request.getParameter("userId");
-			hdao.InformationUpdate("update Information set username=?,ipassword=?,email=?,gender=? where id=? ", name, pwd, email, gender,id);
+			int admin_id=Integer.parseInt(id);
+			hdao.AdminUpdate("update admin set admin_name=?,admin_password=?,admin_contact=?,admin_role=? where admin_id=? ", name, pwd, email, role,admin_id);
 		}
 		
-		request.getRequestDispatcher("/jsp/yonghuServlet").forward(request, response);
+		request.getRequestDispatcher("/jsp/GuanliyuanxqServlet").forward(request, response);
 	}
 
 }

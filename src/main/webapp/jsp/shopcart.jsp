@@ -4,679 +4,679 @@
 <%@ page isELIgnored="false" %> 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>购物车</title>
-		<link rel="icon" href="../img/clown1.png" type="image/png">
-	</head>
-	<link href="//unpkg.com/layui@2.9.7/dist/css/layui.css" rel="stylesheet">
-	<script src="../jquery.min.js"></script>
-	<script>
-		$(document).ready(function() {
-		  $('.sousuo').on('input', function() {
-			$(this).attr('placeholder', '请输入关键词，按回车键搜索');
-		  });
-		
-		  $('.sousuo').keypress(function(e) {
-			if (e.which == 13) {
-			  let keyword = $(this).val();
-			  if (keyword.trim() !== '') {
-				// 执行搜索并提交的逻辑
-				alert('您输入的关键词是：' + keyword);
-			  } else {
-				alert('请输入关键词后再按回车键进行搜索');
-			  }
-			}
-		  });
+<head>
+	<meta charset="utf-8">
+	<title>购物车</title>
+	<link rel="icon" href="../img/clown1.png" type="image/png">
+</head>
+<link href="//unpkg.com/layui@2.9.7/dist/css/layui.css" rel="stylesheet">
+<script src="../jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+	  $('.sousuo').on('input', function() {
+		$(this).attr('placeholder', '请输入关键词，按回车键搜索');
+	  });
+	
+	  $('.sousuo').keypress(function(e) {
+		if (e.which == 13) {
+		  let keyword = $(this).val();
+		  if (keyword.trim() !== '') {
+			  let url = 'select?pname=' + keyword;
+		      location.href = url;
+		  } else {
+			  alert('请输入内容');
+		  }
+		}
+	  });
+	});
+	$(document).ready(function() {
+		$('.denglu').on('mouseover', function() {
+			$('.head_login').css('display', 'flex');
 		});
-		$(document).ready(function() {
-			$('.denglu').on('mouseover', function() {
-				$('.head_login').css('display', 'flex');
-			});
-		
-			$('.denglu').on('mouseout', function() {
-				$('.head_login').css('display', 'none');
-			});
+	
+		$('.denglu').on('mouseout', function() {
+			$('.head_login').css('display', 'none');
 		});
-		$(document).ready(function(){
-			$('.head_login').on('mouseover',function(){
-				$('.head_login').css('display', 'flex');
-			})
-			$('.head_login').on('mouseout', function() {
-				$('.head_login').css('display', 'none');
-			});
+	});
+	$(document).ready(function(){
+		$('.head_login').on('mouseover',function(){
+			$('.head_login').css('display', 'flex');
 		})
-		
-	</script>		
-	<style>
-		body{
-			margin: 0 auto;
-			padding: 0;
+		$('.head_login').on('mouseout', function() {
+			$('.head_login').css('display', 'none');
+		});
+	})
+	
+</script>		
+<style>
+	body{
+		margin: 0 auto;
+		padding: 0;
+	}
+	header {
+			padding: 0 0 0 0;
+			background-color: rgb(248,248,248);
+			text-align: center;
+			position: sticky;
+			top: 0;
+			z-index: 999;
 		}
-		header {
-				padding: 0 0 0 0;
-				background-color: rgb(248,248,248);
-				text-align: center;
-				position: sticky;
-				top: 0;
-				z-index: 999;
-			}
-			.xian{
-				height:3px;
-				background-color:#862633;
-			}
-			.yemei{
-				height: 80px;
-				margin-bottom:12px;
-				padding-top:1px;
-			}
-			.yemei_body{
-				margin:0 auto;
-				padding: 0;
-				width: 1280px;
-				height:56px;
-				margin-top:19px;
-				display:flex;
-			}
-			.body_left{
-				 display: flex;
-				 justify-content: flex-start;
-				 align-items: center;
-				 width: 591px;
-				 flex-direction: row;
-			}
-			.body_left div {
-				height: 56px;
-				line-height: 56px;
-				font-size: 13px;
-				color: black;
-				cursor: pointer;
-				margin-right: 40px;
-			}
-			.service {
-				width: 52px; /* 默认宽度 */
-				transition: width 0.5s; /* 添加过渡效果 */
-			}
-			.service:hover {
-				width: 52px; /* 悬停时的宽度 */
-			}
-			.service:hover .head_hover{
-				display: block;
-			}
-			.head_hover{
-				width: 130px;
-				height: 140px !important; 
-				position: relative;
-				left: -38px;
-				top: -10px;
-				background-color: white;
-				box-shadow: 4px 5px 16px lightgray;
-			}
-			.head_hover_ul{
-				width: 100%;
-				padding: 0px;
-			}
-			.head_hover_ul li{
-				margin:10px 0px 5px 0px;
-				list-style: none;
-				height: 40px;
-				line-height: 40px;
-				font-size: 14px;
-				text-align: center;
-			}
-			.head_hover_ul li:hover{
-				color: #862633;
-				background-color: lightgray;
-			}
-			.body_center{
-				width: 98px;
-				 height: 56px;
-				 cursor: pointer;
-				 background-image: url(../img/clown.png);
-				 background-repeat: no-repeat;
-				 background-size: cover;
-			}
-			.body_right{
-				display: flex;
-				 justify-content: flex-end;
-				 align-items: center;
-				 width: 591px;
-		
-			}
-			.body_right div {
-				height: 56px;
-				margin-left: 20px;
-				cursor: pointer;
-			    display: flex;
-			    align-items: center;
-			}
-			
-			.body_right div a {
-			    font-size:14px;
-			    line-height: 56px;
-			    color: black;
-				margin-left:4px;
-			}
-			.body_right div:nth-child(1) i{
-				background-image: url(../img/金价.png);
-				background-size: cover;
-			}
-			.body_right div:nth-child(2) i{
-				background-image: url(../img/登录注册.png);
-				background-size: cover;
-			}
-			.head_login {
-				display: none;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				background-color: white;
-				width: 285px;
-				position: absolute;
-				top: 80px;
-				right: 280px;
-				box-shadow: 4px 5px 16px lightgray;
-			}	
-			.head_login_body{
-				width: 100%;
-				height: 140px;
-			}
-			.head_login_body_ul{
-				padding-left: 28px;
-			}
-			.head_login_body_ul li{
-				font-size: 14px;
-				line-height: 30px;
-				list-style: none;
-			}
-			.head_login_but{
-				width: 238px;
-				height: 116px;
-			}
-			.head_login_but_dl{
-				width: 100%;
-				height: 45px;
-				background-color: #862633;
-				border: none;
-				color: white;
-				cursor: pointer;
-				margin-top: 5px;
-			}
-			.head_login_but_zc{
-				width: 100%;
-				height: 45px;
-				color: #862633;
-				border: 1px solid #862633;
-				cursor: pointer;
-				background-color: white;
-				margin-top: 15px;
-			}
-			.head_login_but_dl:hover{
-				color: #862633;
-				border: 1px solid #862633;
-				background-color: white;
-			}
-			.head_login_but_zc:hover{
-				background-color: #862633;
-				border: none;
-				color: white;
-			}
-		
-			.body_right div:nth-child(3) i{
-				background-image: url(../img/购物车.png);
-				background-size: cover;
-			}
-			.body_right div i {
-			    width: 20px;
-			    height: 20px;
-			}
-			nav ul {
-			    display: flex;
-			    justify-content: center; /* 或者justify-content: space-evenly; */
-			}
-			header nav ul li:first-child{
-				border-bottom:2px solid red;
-			}
-			nav ul li {
-			    display: inline-block;
-			    margin: 0 10px;
-			    padding: 0 7px 14px;
-			    padding-bottom: 16px;
-			    vertical-align: top; /* 垂直对齐方式改为顶部对齐 */
-			}
-			header nav ul li a {
-				color:black;
-				text-decoration: none;
-			}
-			.hover_box	 {
-			    display: none;
-			    position: absolute;
-			    top: 100%;
-			    left: 0;
-			    width: 100%;
-				height:525px;
-			    background-color: white;
-			    color: #fff;
-			    padding: 10px;
-				box-shadow: 4px 5px 16px lightgray;
-			}
-			.hover_box div ul li:first-child{
-				border-bottom: none;
-			}
-			.layui-tab-bar{
-				display: none;
-			}
-			
-			.layui-tab .layui-tab-title {
-			    text-align: center; /* 设置文本居中 */
-			}
-			
-			.layui-tab .layui-tab-title ul {
-			    display: inline-block;
-			    padding: 0; /* 去除默认内边距 */
-			}
-			
-			.layui-tab .layui-tab-title li {
-			    display: inline-block;
-			    margin: 0 10px; /* 设置间距 */
-			}
-			.layui-this:after{
-				border: none; 
-				border-radius: 0; 
-				border-bottom: 2px solid #862633 !important;
-			}
-			.layui-tab-title li {
-				color: black;
-			}
-			
-			.layui-tab-title .layui-this {
-				color: #862633 !important; 
-			}
-			.container {
-				display: flex;
-				justify-content: space-evenly;
-				align-items: center;
-				flex-wrap: wrap;
-				flex-direction: row;
-				padding-top: 135px;
-				align-content: flex-start;
-			}
-			
-			.hover_box_div {
-			  display: flex;
-			  flex-direction: column;
-			  justify-content: center; /* 垂直居中 */
-			  align-items: center; /* 水平居中 */
-			  text-align: center;
-			}
-			.hover_box_div span{
-				display: block;
-				color: black;
-				padding-left: 8px;
-			}
-			.hover_box_div img{
-				width: 128px;
-				height: 128px;
-			}
-			#bb{
-				padding-left: 11px;
-			}
-			.ss {
-			    display: flex;
-			    align-items: center;
-			}
-			.ss a {
-			    float: none; /* 取消浮动 */
-			    margin-right: 5px; /* 可根据需要调整间距 */
-			}
-			.sousuo {
-			    border: none; /* 去除边线 */
-			    border-bottom: 1px solid #000; /* 初始状态下隐藏底线 */
-			    transition: width 0.5s, border-bottom-color 0.5s; /* 添加过渡效果 */
-				float: left;
-				background-color: rgb(248,248,248);
-				background-image: url(../img/放大镜.png);
-				background-repeat: no-repeat;
-				background-position-x: right;
-			}
-			.sousuo:focus {
-			    width: 150px; /* 调整输入框宽度 */
-			    border-bottom: 1px solid #000; /* 焦点状态下显示底线 */
-			}
-			nav ul li .hover_box:hover .hover_box {
-			    display: block;
-			}
-			nav ul li:hover .hover_box {
-			    display: block;
-			}
-
-
-		
-		
-		#cart_hz_center{
-			margin: 0 auto;
-			padding: 0;
-			width: 1300px;
-			display: flex;
+		.xian{
+			height:3px;
+			background-color:#862633;
 		}
-		#cart_hz{
-			margin-top: 30px;
+		.yemei{
+			height: 80px;
+			margin-bottom:12px;
+			padding-top:1px;
+		}
+		.yemei_body{
+			margin:0 auto;
+			padding: 0;
+			width: 1280px;
+			height:56px;
+			margin-top:19px;
+			display:flex;
+		}
+		.body_left{
+			 display: flex;
+			 justify-content: flex-start;
+			 align-items: center;
+			 width: 591px;
+			 flex-direction: row;
+		}
+		.body_left div {
+			height: 56px;
+			line-height: 56px;
+			font-size: 13px;
+			color: black;
+			cursor: pointer;
+			margin-right: 40px;
+		}
+		.service {
+			width: 52px; /* 默认宽度 */
+			transition: width 0.5s; /* 添加过渡效果 */
+		}
+		.service:hover {
+			width: 52px; /* 悬停时的宽度 */
+		}
+		.service:hover .head_hover{
+			display: block;
+		}
+		.head_hover{
+			width: 130px;
+			height: 140px !important; 
+			position: relative;
+			left: -38px;
+			top: -10px;
+			background-color: white;
+			box-shadow: 4px 5px 16px lightgray;
+		}
+		.head_hover_ul{
 			width: 100%;
+			padding: 0px;
 		}
-		#cart_hz_left{
-			float: left;
-			width: 846px;
+		.head_hover_ul li{
+			margin:10px 0px 5px 0px;
+			list-style: none;
+			height: 40px;
+			line-height: 40px;
+			font-size: 14px;
+			text-align: center;
 		}
-		#cart_hz_left p{
-			margin-bottom: 32px;
-			font-size: 30px;
-			font-weight: 500;
-			color: #6d584f;
-			line-height: 42px;
+		.head_hover_ul li:hover{
+			color: #862633;
+			background-color: lightgray;
 		}
-		.cart_list_head{
+		.body_center{
+			width: 98px;
+			 height: 56px;
+			 cursor: pointer;
+			 background-image: url(../img/clown.png);
+			 background-repeat: no-repeat;
+			 background-size: cover;
+		}
+		.body_right{
 			display: flex;
-			padding: 14px 0;
-			border-bottom: 2px solid #862633;
+			 justify-content: flex-end;
+			 align-items: center;
+			 width: 591px;
+	
 		}
-		.cart_list_head_left {
+		.body_right div {
+			height: 56px;
+			margin-left: 20px;
+			cursor: pointer;
 		    display: flex;
 		    align-items: center;
 		}
-		.cart_list_img {
-			cursor: pointer;
-		    width: 15px;
+		
+		.body_right div a {
+		    font-size:14px;
+		    line-height: 56px;
+		    color: black;
+			margin-left:4px;
 		}
-		.cart_list_font{
-		    font-size: 14px;
-		    padding-left: 20px;
+		.body_right div:nth-child(1) i{
+			background-image: url(../img/金价.png);
+			background-size: cover;
 		}
-		.cart_list_head_left{
-			width: 196px;
-			height: 20px;
+		.body_right div:nth-child(2) i{
+			background-image: url(../img/登录注册.png);
+			background-size: cover;
 		}
-		.cart_list_head_right{
-			display: flex;
-			width: 630px;
-			height: 20px;
-			justify-content: space-between;
-		}
-		.cart_list_font_right{
-		    font-size: 14px;
-			margin-right: 50px;
-		}
-		.cart_body{
-			padding: 20px 0px;
-			width: 846px;
-			height: 210px;
-			display: flex;
-			background-color: white;
+		.head_login {
+			display: none;
+			flex-direction: column;
+			justify-content: center;
 			align-items: center;
-		}
-		.cart_img_dindan{
-			width: 160px;
-			margin-left: 30px;
-		}
-		.cart_list_details{
-			width: 642px;
-			height: 150px;
-		}
-		.cart_list_details_title{
-			display: flex;
+			background-color: white;
+			width: 285px;
+			position: absolute;
+			top: 80px;
+			right: 280px;
+			box-shadow: 4px 5px 16px lightgray;
+		}	
+		.head_login_body{
 			width: 100%;
-			height: 30px;
-			justify-content: space-between;
+			height: 140px;
 		}
-		.cart_list_details_name{
-			line-height: 30px;
+		.head_login_body_ul{
+			padding-left: 28px;
 		}
-		.cart_list_details_price{
-			line-height: 30px;
-			margin-right: 7%;
-			font-size:16px;
-			color: #862633;
-		}
-		.cart_list_details_guige{
-			color: dimgray;
-			font-size: 12px;
-			margin-top: 15px;
-		}
-		.cart_list_details_btn{
-			width: 100%;
-			height: 30px;
-			margin-top: 9%;
-			display: flex;
-		}
-		.cart_list_details_btn_cz{
-			text-decoration: underline;
-			color: dimgray;
+		.head_login_body_ul li{
 			font-size: 14px;
-			cursor: pointer;
+			line-height: 30px;
+			list-style: none;
 		}
-		.cart_list_details_btn_cz:nth-child(2){
-			margin-left: 20px;
+		.head_login_but{
+			width: 238px;
+			height: 116px;
 		}
-		hr{
-			margin: 0;
-		}
-		#cart_hz_right{
-			padding: 30px;
-			float: right;
-			width: 380px;
-			height: 363px;
-			margin-top: 40px;
-			background-color: #f8f8f8;
-		}
-		.cart_jiesuan_title{
+		.head_login_but_dl{
 			width: 100%;
-			display: flex;
-			justify-content: space-between;
-		}
-		.dindanyilan{
-			font-size: 22px;
-			font-weight: 580;
-		}
-		.dingdan_sele_span{
-			color: #862633;
-			padding: 0px 5px;
-		}
-		.cart_jiesuan_count{
-			margin-top: 40px;
-			display: flex;
-			justify-content: space-between;
-		}
-		.dingdan_sele_smail{
-			color: #862633;
-		}
-		.dingdan_sele_big{
-			font-size: 24px;
-			color: #862633;
-		}
-		.count_btn{
-			width: 354px;
-			
-		}
-		.jiesuan_btn{
-			margin-top: 70px;
+			height: 45px;
+			background-color: #862633;
 			border: none;
 			color: white;
-			background-color: #862633;
-		}
-		.gouwu_btn{
-			margin-top: 30px;
-			border: 1px solid #862633;
-			background-color: #f8f8f8;
-		}
-		.gouwu_btn,.jiesuan_btn{
-			font-size: 16px;
-			margin-left: 15px;
 			cursor: pointer;
-			height: 48px;
+			margin-top: 5px;
+		}
+		.head_login_but_zc{
 			width: 100%;
+			height: 45px;
+			color: #862633;
+			border: 1px solid #862633;
+			cursor: pointer;
+			background-color: white;
+			margin-top: 15px;
+		}
+		.head_login_but_dl:hover{
+			color: #862633;
+			border: 1px solid #862633;
+			background-color: white;
+		}
+		.head_login_but_zc:hover{
+			background-color: #862633;
+			border: none;
+			color: white;
+		}
+	
+		.body_right div:nth-child(3) i{
+			background-image: url(../img/购物车.png);
+			background-size: cover;
+		}
+		.body_right div i {
+		    width: 20px;
+		    height: 20px;
+		}
+		nav ul {
+		    display: flex;
+		    justify-content: center; /* 或者justify-content: space-evenly; */
+		}
+		header nav ul li:first-child{
+			border-bottom:2px solid red;
+		}
+		nav ul li {
+		    display: inline-block;
+		    margin: 0 10px;
+		    padding: 0 7px 14px;
+		    padding-bottom: 16px;
+		    vertical-align: top; /* 垂直对齐方式改为顶部对齐 */
+		}
+		header nav ul li a {
+			color:black;
+			text-decoration: none;
+		}
+		.hover_box	 {
+		    display: none;
+		    position: absolute;
+		    top: 100%;
+		    left: 0;
+		    width: 100%;
+			height:525px;
+		    background-color: white;
+		    color: #fff;
+		    padding: 10px;
+			box-shadow: 4px 5px 16px lightgray;
+		}
+		.hover_box div ul li:first-child{
+			border-bottom: none;
+		}
+		.layui-tab-bar{
+			display: none;
+		}
+		
+		.layui-tab .layui-tab-title {
+		    text-align: center; /* 设置文本居中 */
+		}
+		
+		.layui-tab .layui-tab-title ul {
+		    display: inline-block;
+		    padding: 0; /* 去除默认内边距 */
+		}
+		
+		.layui-tab .layui-tab-title li {
+		    display: inline-block;
+		    margin: 0 10px; /* 设置间距 */
+		}
+		.layui-this:after{
+			border: none; 
+			border-radius: 0; 
+			border-bottom: 2px solid #862633 !important;
+		}
+		.layui-tab-title li {
+			color: black;
+		}
+		
+		.layui-tab-title .layui-this {
+			color: #862633 !important; 
+		}
+		.container {
+			display: flex;
+			justify-content: space-evenly;
+			align-items: center;
+			flex-wrap: wrap;
+			flex-direction: row;
+			padding-top: 135px;
+			align-content: flex-start;
+		}
+		
+		.hover_box_div {
+		  display: flex;
+		  flex-direction: column;
+		  justify-content: center; /* 垂直居中 */
+		  align-items: center; /* 水平居中 */
+		  text-align: center;
+		}
+		.hover_box_div span{
+			display: block;
+			color: black;
+			padding-left: 8px;
+		}
+		.hover_box_div img{
+			width: 128px;
+			height: 128px;
+		}
+		#bb{
+			padding-left: 11px;
+		}
+		.ss {
+		    display: flex;
+		    align-items: center;
+		}
+		.ss a {
+		    float: none; /* 取消浮动 */
+		    margin-right: 5px; /* 可根据需要调整间距 */
+		}
+		.sousuo {
+		    border: none; /* 去除边线 */
+		    border-bottom: 1px solid #000; /* 初始状态下隐藏底线 */
+		    transition: width 0.5s, border-bottom-color 0.5s; /* 添加过渡效果 */
+			float: left;
+			background-color: rgb(248,248,248);
+			background-image: url(../img/放大镜.png);
+			background-repeat: no-repeat;
+			background-position-x: right;
+		}
+		.sousuo:focus {
+		    width: 150px; /* 调整输入框宽度 */
+		    border-bottom: 1px solid #000; /* 焦点状态下显示底线 */
+		}
+		nav ul li .hover_box:hover .hover_box {
+		    display: block;
+		}
+		nav ul li:hover .hover_box {
+		    display: block;
+		}
+
+
+	
+	
+	#cart_hz_center{
+		margin: 0 auto;
+		padding: 0;
+		width: 1300px;
+		display: flex;
+	}
+	#cart_hz{
+		margin-top: 30px;
+		width: 100%;
+	}
+	#cart_hz_left{
+		float: left;
+		width: 846px;
+	}
+	#cart_hz_left p{
+		margin-bottom: 32px;
+		font-size: 30px;
+		font-weight: 500;
+		color: #6d584f;
+		line-height: 42px;
+	}
+	.cart_list_head{
+		display: flex;
+		padding: 14px 0;
+		border-bottom: 2px solid #862633;
+	}
+	.cart_list_head_left {
+	    display: flex;
+	    align-items: center;
+	}
+	.cart_list_img {
+		cursor: pointer;
+	    width: 15px;
+	}
+	.cart_list_font{
+	    font-size: 14px;
+	    padding-left: 20px;
+	}
+	.cart_list_head_left{
+		width: 196px;
+		height: 20px;
+	}
+	.cart_list_head_right{
+		display: flex;
+		width: 630px;
+		height: 20px;
+		justify-content: space-between;
+	}
+	.cart_list_font_right{
+	    font-size: 14px;
+		margin-right: 50px;
+	}
+	.cart_body{
+		padding: 20px 0px;
+		width: 846px;
+		height: 210px;
+		display: flex;
+		background-color: white;
+		align-items: center;
+	}
+	.cart_img_dindan{
+		width: 160px;
+		margin-left: 30px;
+	}
+	.cart_list_details{
+		width: 642px;
+		height: 150px;
+	}
+	.cart_list_details_title{
+		display: flex;
+		width: 100%;
+		height: 30px;
+		justify-content: space-between;
+	}
+	.cart_list_details_name{
+		line-height: 30px;
+	}
+	.cart_list_details_price{
+		line-height: 30px;
+		margin-right: 7%;
+		font-size:16px;
+		color: #862633;
+	}
+	.cart_list_details_guige{
+		color: dimgray;
+		font-size: 12px;
+		margin-top: 15px;
+	}
+	.cart_list_details_btn{
+		width: 100%;
+		height: 30px;
+		margin-top: 9%;
+		display: flex;
+	}
+	.cart_list_details_btn_cz{
+		text-decoration: underline;
+		color: dimgray;
+		font-size: 14px;
+		cursor: pointer;
+	}
+	.cart_list_details_btn_cz:nth-child(2){
+		margin-left: 20px;
+	}
+	hr{
+		margin: 0;
+	}
+	#cart_hz_right{
+		padding: 30px;
+		float: right;
+		width: 380px;
+		height: 363px;
+		margin-top: 40px;
+		background-color: #f8f8f8;
+	}
+	.cart_jiesuan_title{
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+	.dindanyilan{
+		font-size: 22px;
+		font-weight: 580;
+	}
+	.dingdan_sele_span{
+		color: #862633;
+		padding: 0px 5px;
+	}
+	.cart_jiesuan_count{
+		margin-top: 40px;
+		display: flex;
+		justify-content: space-between;
+	}
+	.dingdan_sele_smail{
+		color: #862633;
+	}
+	.dingdan_sele_big{
+		font-size: 24px;
+		color: #862633;
+	}
+	.count_btn{
+		width: 354px;
+		
+	}
+	.jiesuan_btn{
+		margin-top: 70px;
+		border: none;
+		color: white;
+		background-color: #862633;
+	}
+	.gouwu_btn{
+		margin-top: 30px;
+		border: 1px solid #862633;
+		background-color: #f8f8f8;
+	}
+	.gouwu_btn,.jiesuan_btn{
+		font-size: 16px;
+		margin-left: 15px;
+		cursor: pointer;
+		height: 48px;
+		width: 100%;
+	}
+	
+	
+	
+	.zunxiang_ul{
+			 display: flex;
+			 justify-content: space-between;
+			 align-items: flex-start;
+			 padding:0;
+			 margin:0 auto;
+			 width: 1175px;
+		}
+		.zunxiang_ul li{
+			display: flex;
+			 flex-direction: column;
+			 align-items: center;
+			 width: 200px;
+			 height:144px;
+		}
+		.zunxiang_div1{
+			width: 64px;
+			height: 22px;
+			font-size: 15px;
+			margin: 10px 0px 10px 1px;
+		}
+		.zunxiang_div2{
+			font-size: 13px;
+			text-align: center;
+			line-height: 25px;
+		}
+		.zunxiang_ul li img{
+			width: 50px;
+			height: 50px;
+		}
+		.zunxiangtiyan {
+		  display: flex;
+		  align-items: center;
+		  height: 280px;
+		  flex-direction: column;
+		  justify-content: space-evenly;
+		}
+		.zunxiangtiyan i {
+			background-image: url(../img/主页钻石.png);
+			background-size: cover;
+			width: 30px;
+			height: 30px;
+		}
+		#zunxiang{
+				font-size:24px;
+				font-weight:500;
+				color:#6d584f;
+				text-align:center;
+		}
+		footer {
+			text-align: center;
+			padding: 10px 0;
+			width: 100%;
+			height:100px;
+		}
+		.huidaodingduan {
+			position: fixed;
+			right: 48px;
+			bottom: 150px;
+			display: none;
+			justify-content: center;
+			align-items: center;
+			width: 54px;
+			height: 54px;
+			background-image: url(../img/箭头.png);
+			background-repeat: no-repeat;
+			background-size: 36px;
+			background-position: center;
+			border: 2px solid #862633;
+			border-radius: 50%;
+			cursor: pointer;
 		}
 		
 		
 		
-		.zunxiang_ul{
-				 display: flex;
-				 justify-content: space-between;
-				 align-items: flex-start;
-				 padding:0;
-				 margin:0 auto;
-				 width: 1175px;
-			}
-			.zunxiang_ul li{
-				display: flex;
-				 flex-direction: column;
-				 align-items: center;
-				 width: 200px;
-				 height:144px;
-			}
-			.zunxiang_div1{
-				width: 64px;
-				height: 22px;
-				font-size: 15px;
-				margin: 10px 0px 10px 1px;
-			}
-			.zunxiang_div2{
-				font-size: 13px;
-				text-align: center;
-				line-height: 25px;
-			}
-			.zunxiang_ul li img{
-				width: 50px;
-				height: 50px;
-			}
-			.zunxiangtiyan {
-			  display: flex;
-			  align-items: center;
-			  height: 280px;
-			  flex-direction: column;
-			  justify-content: space-evenly;
-			}
-			.zunxiangtiyan i {
-				background-image: url(../img/主页钻石.png);
-				background-size: cover;
-				width: 30px;
-				height: 30px;
-			}
-			#zunxiang{
-					font-size:24px;
-					font-weight:500;
-					color:#6d584f;
-					text-align:center;
-			}
-			footer {
-				text-align: center;
-				padding: 10px 0;
-				width: 100%;
-				height:100px;
-			}
-			.huidaodingduan {
-				position: fixed;
-				right: 48px;
-				bottom: 150px;
-				display: none;
-				justify-content: center;
-				align-items: center;
-				width: 54px;
-				height: 54px;
-				background-image: url(../img/箭头.png);
-				background-repeat: no-repeat;
-				background-size: 36px;
-				background-position: center;
-				border: 2px solid #862633;
-				border-radius: 50%;
-				cursor: pointer;
-			}
+		.buttom_box{
+			height:257px;
+			padding-top:50px;
+		}
+		.buttom_box_body{
+			display: flex;
+			 justify-content: space-between;
+			 align-items: flex-start;
+			 width: calc(100% - 736px);
+			 min-width: 1184px;
+			 padding: 30px 0;
+			 margin: 0 auto;
 			
-			
-			
-			.buttom_box{
-				height:257px;
-				padding-top:50px;
-			}
-			.buttom_box_body{
-				display: flex;
-				 justify-content: space-between;
-				 align-items: flex-start;
-				 width: calc(100% - 736px);
-				 min-width: 1184px;
-				 padding: 30px 0;
-				 margin: 0 auto;
-				
-			}
-			.buttom_box_left{
-				width:760px;
-				height:144px;
-				display:flex;
-				background-color:white;
-			}
-			.buttom_box_left div {
-			    display: flex;
-				flex-direction: column;
-				justify-content: flex-start;
-				align-items: flex-start;
-				width: 190px;
-				height: 144px;
-			}
-			
-			.buttom_box_left div ul li {
-			    display: flex;
-			    font-size: 14px;
-			    list-style: none;
-			    align-items: center; /* 垂直居中对齐 */
-			}
-			
-			.buttom_box_left div h5 {
-			    display: flex;
-			    flex-direction: column;
-			    align-items: center;
-			    margin-bottom: 10px; /* 调整标题与列表之间的间距 */
-			}
-			.buttom_box_left div:nth-child(1) h5{
-				margin-right: 11px;
-			}
-			.buttom_box_left div:nth-child(2) h5{
-				margin-right: 133px;
-			}
-			.p{
-				font-size: 14px;
-			}
-			.buttom_box_left div:nth-child(3) .p:nth-child(3) {
-				margin-top: -40px;
-			}
-			
-			.buttom_box_left div:nth-child(3) h5{
-				margin-right: 28px;
-			}
-			.buttom_box_right{
-				width:309px;
-				height:144px;
-			}
-			.buttom_box_right div,p{
-				text-align:center;
-			}
-			.buttom_box_right div{
-				font-size: 15px;
-				font-weight: 400;
-				color: #333;
-				line-height: 27px;
-			}
-			.buttom_box_right p{
-				font-size: 30px;
-				font-weight: 500;
-				color: #862633;
-				line-height: 33px;
-				margin:5px 0 20px 0;
-			}
-			.input_number{
-				width: 40px;
-				height: 20px;
-			    border: 1px solid #ccc;
-			    text-align: center;
-			    font-size:12px;
-			}
+		}
+		.buttom_box_left{
+			width:760px;
+			height:144px;
+			display:flex;
+			background-color:white;
+		}
+		.buttom_box_left div {
+		    display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+			width: 190px;
+			height: 144px;
+		}
+		
+		.buttom_box_left div ul li {
+		    display: flex;
+		    font-size: 14px;
+		    list-style: none;
+		    align-items: center; /* 垂直居中对齐 */
+		}
+		
+		.buttom_box_left div h5 {
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
+		    margin-bottom: 10px; /* 调整标题与列表之间的间距 */
+		}
+		.buttom_box_left div:nth-child(1) h5{
+			margin-right: 11px;
+		}
+		.buttom_box_left div:nth-child(2) h5{
+			margin-right: 133px;
+		}
+		.p{
+			font-size: 14px;
+		}
+		.buttom_box_left div:nth-child(3) .p:nth-child(3) {
+			margin-top: -40px;
+		}
+		
+		.buttom_box_left div:nth-child(3) h5{
+			margin-right: 28px;
+		}
+		.buttom_box_right{
+			width:309px;
+			height:144px;
+		}
+		.buttom_box_right div,p{
+			text-align:center;
+		}
+		.buttom_box_right div{
+			font-size: 15px;
+			font-weight: 400;
+			color: #333;
+			line-height: 27px;
+		}
+		.buttom_box_right p{
+			font-size: 30px;
+			font-weight: 500;
+			color: #862633;
+			line-height: 33px;
+			margin:5px 0 20px 0;
+		}
+		.input_number{
+			width: 40px;
+			height: 20px;
+		    border: 1px solid #ccc;
+		    text-align: center;
+		    font-size:12px;
+		}
 	</style>
 <body>
 	<div class="xian" id="xian"></div>
@@ -727,7 +727,7 @@
 		    <ul>
 		        <li><a href="home">首页</a></li>
 		        <li>
-		            <a href="#">全部商品</a>
+		            <a href="all">全部商品</a>
 		            <div class="hover_box">
 						<div class="layui-tab layui-tab-brief">
 						  <ul class="layui-tab-title">
@@ -929,7 +929,7 @@
 <div id="cart_hz">
     <div id="cart_hz_center">
         <div id="cart_hz_left">
-            <p>我的购物袋</p>
+            <p>我的购物袋(${zcount})</p>
             <div class="cart_list">
                 <div class="cart_list_head">
                     <div class="cart_list_head_left">
@@ -965,7 +965,7 @@
 			                </div>
 			            </c:forEach> --%>
 			            <div class="cart_list_details_guige" id="shuliang">
-			                数量：${listc.ccount}
+			                数量：${zcount}
 			            </div>
 			            <div class="cart_list_details_btn">
 			                <div class="cart_list_details_btn_cz">
@@ -984,17 +984,14 @@
 			                </div>
 			                <div class="cart_list_details_btn_cz delete_btn" cid="${listc.cid}">移除</div>
 			                <script>
-							    $(document).ready(function() {
-							        // 给每个删除按钮添加点击事件
-							        $('.delete_btn').click(function() {
-							            var result = confirm("确定要删除吗？");
-							
-							            if (result) {
-							                var cid = $(this).attr('cid');
-							                ajaxDeleteAndUpdate(cid); // 调用删除并更新的函数
-							            }
-							        });
-							    });
+			                $(document).ready(function() {
+			                    // 给每个删除按钮添加点击事件
+			                    $('.delete_btn').click(function() {
+			                        var cid = $(this).attr('cid');
+			                        ajaxDeleteAndUpdate(cid); // 调用删除并更新的函数
+			                    });
+			                });
+
 							
 							    function ajaxDeleteAndUpdate(cid) {
 							        // 发送 AJAX 请求删除商品
@@ -1035,7 +1032,7 @@
             </div>
             <div class="count_btn">
                 <button class="jiesuan_btn">去结算</button>
-                <button class="gouwu_btn">继续购物</button>
+                <a href="home"><button class="gouwu_btn">继续购物</button></a>
             </div>
         </div>
     </div>
