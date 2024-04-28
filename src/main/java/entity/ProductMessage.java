@@ -14,7 +14,7 @@ public class ProductMessage {
 	}
 
 	private int proId;  
-    private String proName;  
+    private String proName; 
     private int categoryId;  
     private int proStatus;
     
@@ -36,8 +36,13 @@ public class ProductMessage {
 		super();
 		this.count = count;
 	}
+  
+    private int Cate_id;
+    
+    private String Cate_name;
+  
 
-	public String getDetail() {
+    public String getDetail() {
 		return detail;
 	}
 
@@ -74,13 +79,34 @@ public class ProductMessage {
 		this.detail = detail;
 	}
 
+    public ProductMessage(int proId, String proName, int categoryId, int proStatus, int cate_id,
+			String cate_name) {
+		super();
+		this.proId = proId;
+		this.proName = proName;
+		this.categoryId = categoryId;
+		this.proStatus = proStatus;
+		Cate_id = cate_id;
+		Cate_name = cate_name;
+	}
 	public int getProId() {
-        return proId;
-    }
-
-    public void setProId(int proId) {
-        this.proId = proId;
-    }
+		return proId;
+	}
+	public void setProId(int proId) {
+		this.proId = proId;
+	}
+	public int getCate_id() {
+		return Cate_id;
+	}
+	public void setCate_id(int cate_id) {
+		Cate_id = cate_id;
+	}
+	public String getCate_name() {
+		return Cate_name;
+	}
+	public void setCate_name(String cate_name) {
+		Cate_name = cate_name;
+	}
 
     public String getProName() {
         return proName;
@@ -105,9 +131,6 @@ public class ProductMessage {
     public void setProStatus(int proStatus) {
         this.proStatus = proStatus;
     }
-
- 
-
     @Override
 	public String toString() {
 		return "ProductMessage [proId=" + proId + ", proName=" + proName + ", categoryId=" + categoryId + ", proStatus="

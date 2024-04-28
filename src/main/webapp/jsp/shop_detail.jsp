@@ -194,7 +194,7 @@
 			</div>
 		</div>		     
 		<div class="shop_right_btn">
-			<button class="shop_right_btn_left">加入购物车</button>
+			<a href="shopcartzj"></a><button class="shop_right_btn_left">加入购物车</button>
 			<a><button class="shop_right_btn_right">立即购买</button></a>
 		</div>
 	</div>

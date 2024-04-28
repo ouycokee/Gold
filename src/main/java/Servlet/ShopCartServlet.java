@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.ShopCartDAO;
 import entity.Cart;
-import entity.Image;
-import entity.ProductMessage;
 import entity.Specs;
 
 @WebServlet("/jsp/shopcart")
