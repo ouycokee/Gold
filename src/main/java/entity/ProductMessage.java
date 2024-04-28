@@ -36,7 +36,6 @@ public class ProductMessage {
 		super();
 		this.count = count;
 	}
-
   
     private int Cate_id;
     
@@ -90,74 +89,21 @@ public class ProductMessage {
 		Cate_id = cate_id;
 		Cate_name = cate_name;
 	}
-
-
-
-
-
-
-
 	public int getProId() {
 		return proId;
 	}
-
-
-
-
-
-
-
 	public void setProId(int proId) {
 		this.proId = proId;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public int getCate_id() {
 		return Cate_id;
 	}
-
-
-
-
-
-
-
 	public void setCate_id(int cate_id) {
 		Cate_id = cate_id;
 	}
-
-
-
-
-
-
-
 	public String getCate_name() {
 		return Cate_name;
 	}
-
-
-
-
-
-
-
 	public void setCate_name(String cate_name) {
 		Cate_name = cate_name;
 	}
@@ -185,9 +131,6 @@ public class ProductMessage {
     public void setProStatus(int proStatus) {
         this.proStatus = proStatus;
     }
-
- 
-
     @Override
 	public String toString() {
 		return "ProductMessage [proId=" + proId + ", proName=" + proName + ", categoryId=" + categoryId + ", proStatus="

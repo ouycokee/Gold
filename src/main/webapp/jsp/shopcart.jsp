@@ -929,11 +929,9 @@
 <div id="cart_hz">
     <div id="cart_hz_center">
         <div id="cart_hz_left">
-<<<<<<< HEAD
-            <p>我的购物袋</p>
-=======
             <p>我的购物袋(${zcount})</p>
->>>>>>> refs/heads/oyikw
+            <p>我的购物袋</p>
+            <p>我的购物袋(${zcount})</p>
             <div class="cart_list">
                 <div class="cart_list_head">
                     <div class="cart_list_head_left">
